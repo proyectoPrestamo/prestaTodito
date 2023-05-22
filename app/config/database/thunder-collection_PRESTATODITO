@@ -1,0 +1,97 @@
+{
+    "client": "Thunder Client",
+    "collectionName": "PRESTATODITO",
+    "dateExported": "2023-05-22T03:29:27.238Z",
+    "version": "1.1",
+    "folders": [
+        {
+            "_id": "866d7b4f-d612-444f-93b7-5c2d5e9a0c6a",
+            "name": "ROL",
+            "containerId": "",
+            "created": "2023-05-22T00:15:59.282Z",
+            "sortNum": 10000
+        }
+    ],
+    "requests": [
+        {
+            "_id": "b9dc7912-5745-40f8-98a7-9fde64591594",
+            "colId": "92006d12-37d8-47a0-8af9-5bcb51ca3baa",
+            "containerId": "866d7b4f-d612-444f-93b7-5c2d5e9a0c6a",
+            "name": "MOSTRAR TODOS",
+            "url": "http://localhost:3000/api/rol",
+            "method": "GET",
+            "sortNum": 10000,
+            "created": "2023-05-22T00:16:46.357Z",
+            "modified": "2023-05-22T00:18:34.735Z",
+            "headers": [],
+            "params": [],
+            "tests": []
+        },
+        {
+            "_id": "50e49084-25d2-4f31-ad3f-4f24dedb0d00",
+            "colId": "92006d12-37d8-47a0-8af9-5bcb51ca3baa",
+            "containerId": "866d7b4f-d612-444f-93b7-5c2d5e9a0c6a",
+            "name": "MOSTRAR ",
+            "url": "http://localhost:3000/api/rol/4",
+            "method": "GET",
+            "sortNum": 20000,
+            "created": "2023-05-22T00:16:53.421Z",
+            "modified": "2023-05-22T03:02:08.598Z",
+            "headers": [],
+            "params": [],
+            "tests": []
+        },
+        {
+            "_id": "de629930-0f5b-472f-9557-1bd2e844edcd",
+            "colId": "92006d12-37d8-47a0-8af9-5bcb51ca3baa",
+            "containerId": "866d7b4f-d612-444f-93b7-5c2d5e9a0c6a",
+            "name": "INSERTAR",
+            "url": "http://localhost:3000/api/rol",
+            "method": "POST",
+            "sortNum": 30000,
+            "created": "2023-05-22T00:16:56.909Z",
+            "modified": "2023-05-22T03:20:49.903Z",
+            "headers": [],
+            "params": [],
+            "body": {
+                "type": "json",
+                "raw": "{\n  \"nombre_rol\": \"instru\",\n  \"estado_rol\": \"ACTIVO\"\n}",
+                "form": []
+            },
+            "tests": []
+        },
+        {
+            "_id": "6988fa81-0455-4a95-a1c7-54c44e3ac14f",
+            "colId": "92006d12-37d8-47a0-8af9-5bcb51ca3baa",
+            "containerId": "866d7b4f-d612-444f-93b7-5c2d5e9a0c6a",
+            "name": "ACTUALIZAR",
+            "url": "http://localhost:3000/api/rol/9",
+            "method": "PUT",
+            "sortNum": 40000,
+            "created": "2023-05-22T00:16:59.372Z",
+            "modified": "2023-05-22T03:21:40.206Z",
+            "headers": [],
+            "params": [],
+            "body": {
+                "type": "json",
+                "raw": "{\n  \n  \"nombre_rol\": \"coordi\",\n  \"estado_rol\": \"ACTIVO\"\n}",
+                "form": []
+            },
+            "tests": []
+        },
+        {
+            "_id": "58e9db44-351e-4fa1-9305-d62d543afcec",
+            "colId": "92006d12-37d8-47a0-8af9-5bcb51ca3baa",
+            "containerId": "866d7b4f-d612-444f-93b7-5c2d5e9a0c6a",
+            "name": "DELETE",
+            "url": "http://localhost:3000/api/rol/10",
+            "method": "DELETE",
+            "sortNum": 50000,
+            "created": "2023-05-22T00:17:29.153Z",
+            "modified": "2023-05-22T03:23:51.934Z",
+            "headers": [],
+            "params": [],
+            "tests": []
+        }
+    ]
+}
