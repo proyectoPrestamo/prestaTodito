@@ -9,5 +9,7 @@ const route = Router();
 route.get("/material",controller.findAllMaterial);
 route.get("/material/:id",controller.findMaterial);
 route.post("/material",controller.insertMaterial);
-route.put("/material",controller.updateMaterial);
+route.put("/material/:id",controller.updateMaterial);
 route.delete("/material/:id",controller.deleteMaterial);
+
+export default route;

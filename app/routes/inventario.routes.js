@@ -9,5 +9,7 @@ const route = Router();
 route.get("/inventario",controller.findAllInventario);
 route.get("/inventario/:id",controller.findInventario);
 route.post("/inventario",controller.insertInventario);
-route.put("/inventario",controller.updateInventario);
+route.put("/inventario/:id",controller.updateInventario);
 route.delete("/inventario/:id",controller.deleteInventario);
+
+export default route;

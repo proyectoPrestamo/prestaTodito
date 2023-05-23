@@ -6,7 +6,7 @@ import { pool } from "../config/database/db";
 export const findAllMaterial = async (req, res) => {
 
     try {
-       const [rows] = await proyectoinsumos.query("CALL spFindAllMaterial();");
+       const [rows] = await pool.query("CALL spFindAllMaterial();");
        res.json(rows);
     } catch (error) {
        console.error("Ha ocurrido un error");
@@ -14,9 +14,9 @@ export const findAllMaterial = async (req, res) => {
     }
  };
  export const findMaterial = async (req, res) => {
-    const id_material = req.params.id_material;
+    const id= req.params.id;
     try {
-       const [rows] = await proyectoinsumos.query(`CALL spFindMaterial(${id_material});`);
+       const [rows] = await pool.query(`CALL spFindMaterial(${id});`);
        res.json(rows);
     } catch (error) {
        console.error("Ha ocurrido un error");
@@ -24,15 +24,16 @@ export const findAllMaterial = async (req, res) => {
     }
  };
  export const insertMaterial = async (req, res) => {
-    const nombre_material = req.body.nombre;
-    const tipo_material = req.body.tipo;
-    const estado_material = req.body.estado;
-    const cantidad_material = req.body.cantidad;
-    const color_material = req.body.color;
-    const medida_material = req.body.medida;
+    const nombre = req.body.nombre;
+    const tipo = req.body.tipo;
+    const estado = req.body.estado;
+    const cantidad = req.body.cantidad;
+    const color = req.body.color;
+    const medida = req.body.medida;
+    const id_horario = req.body.id_horario;
  
     try {
-       const result = await proyectoinsumos.query(`CALL spInsertMaterial('${nombre_material}','${tipo_material}','${estado_material}''${cantidad_material}','${color_material}','${medida_material}');`);
+       const result = await pool.query(`CALL spInsertMaterial('${nombre}','${tipo}','${estado}','${cantidad}','${color}','${medida}',${id_horario});`);
        res.json(result);
     } catch (error) {
        console.error("Ha ocurrido un error" + error);
@@ -40,9 +41,9 @@ export const findAllMaterial = async (req, res) => {
  
  };
  export const deleteMaterial = async (req, res) => {
-    const id_material = req.params.id_material;
+    const id= req.params.id;
     try {
-       const result = await proyectoinsumos.query(`CALL spDeleteMaterial(${id_material})`);
+       const result = await pool.query(`CALL spDeleteMaterial(${id})`);
        if (result[0].affectedRows == 1)
           res.json(result);
        else
@@ -54,16 +55,17 @@ export const findAllMaterial = async (req, res) => {
  
  };
  export const updateMaterial = async (req, res) => {
-    const id_material = req.params.id_material;
-    const nombre_material = req.body.nombre;
-    const tipo_material = req.body.tipo;
-    const estado_material = req.body.estado;
-    const cantidad_material = req.body.cantidad;
-    const color_material = req.body.color;
-    const medida_material = req.body.medida;
+    const id= req.params.id;
+    const nombre = req.body.nombre;
+    const tipo = req.body.tipo;
+    const estado = req.body.estado;
+    const cantidad = req.body.cantidad;
+    const color = req.body.color;
+    const medida = req.body.medida;
+    const id_horario = req.body.id_horario;
  
     try {
-       const result = await proyectoinsumos.query(`CALL spUpdateMaterial(${id_material},'${nombre_material}','${tipo_material}','${estado_material}''${cantidad_material}','${color_material}','${medida_material}');`);
+       const result = await pool.query(`CALL spUpdateMaterial(${id},'${nombre}','${tipo}','${estado}','${cantidad}','${color}','${medida}','${id_horario}');`);
        if (result[0].affectedRows != 0)
           res.json(result);
        else

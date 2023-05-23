@@ -9,5 +9,7 @@ const route = Router();
 route.get("/horario",controller.findAllHorario);
 route.get("/horario/:id",controller.findHorario);
 route.post("/horario",controller.insertHorario);
-route.put("/horario",controller.updateHorario);
+route.put("/horario/:id",controller.updateHorario);
 route.delete("/horario/:id",controller.deleteHorario);
+
+export default route;

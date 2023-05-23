@@ -7,7 +7,7 @@ import { pool } from "../config/database/db";
 export const findAllHorario = async (req, res) => {
 
     try {
-       const [rows] = await proyectoinsumos.query("CALL spFindAllHorario();");
+       const [rows] = await pool.query("CALL spFindAllHorario();");
        res.json(rows);
     } catch (error) {
        console.error("Ha ocurrido un error");
@@ -15,9 +15,9 @@ export const findAllHorario = async (req, res) => {
     }
  };
  export const findHorario = async (req, res) => {
-    const id_horario = req.params.id_horario;
+    const id = req.params.id;
     try {
-       const [rows] = await proyectoinsumos.query(`CALL spFindHorario(${id_horario});`);
+       const [rows] = await pool.query(`CALL spFindHorario(${id});`);
        res.json(rows);
     } catch (error) {
        console.error("Ha ocurrido un error");
@@ -30,7 +30,7 @@ export const findAllHorario = async (req, res) => {
     const fecha_registro = req.body.fecha_registro;
  
     try {
-       const result = await proyectoinsumos.query(`CALL spInsertHorario('${fecha_hora}','${tiempo_requerido}','${fecha_registro}');`);
+       const result = await pool.query(`CALL spInsertHorario('${fecha_hora}','${tiempo_requerido}','${fecha_registro}');`);
        res.json(result);
     } catch (error) {
        console.error("Ha ocurrido un error" + error);
@@ -38,9 +38,9 @@ export const findAllHorario = async (req, res) => {
  
  };
  export const deleteHorario = async (req, res) => {
-    const id_horario = req.params.id_horario;
+    const id = req.params.id;
     try {
-       const result = await proyectoinsumos.query(`CALL spDeleteHorario(${id_horario})`);
+       const result = await pool.query(`CALL spDeleteHorario(${id})`);
        if (result[0].affectedRows == 1)
           res.json(result);
        else
@@ -52,13 +52,13 @@ export const findAllHorario = async (req, res) => {
  
  };
  export const updateHorario = async (req, res) => {
-    const id_horario = req.params.id_horario;
+    const id = req.params.id;
     const fecha_hora = req.body.fecha_hora;
     const tiempo_requerido = req.body.tiempo_requerido;
     const fecha_registro = req.body.fecha_registro;
  
     try {
-       const result = await proyectoinsumos.query(`CALL spUpdateHorario(${id_horario},'${fecha_hora}','${tiempo_requerido}','${fecha_registro}');`)
+       const result = await pool.query(`CALL spUpdateHorario(${id},'${fecha_hora}','${tiempo_requerido}','${fecha_registro}');`)
        if (result[0].affectedRows != 0)
           res.json(result);
        else

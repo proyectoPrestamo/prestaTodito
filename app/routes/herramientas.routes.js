@@ -9,5 +9,7 @@ const route = Router();
 route.get("/herramientas",controller.findAllHerramienta);
 route.get("/herramientas/:id",controller.findHerramienta);
 route.post("/herramientas",controller.insertHerramienta);
-route.put("/herramientas",controller.updateHerramienta);
+route.put("/herramientas/:id",controller.updateHerramienta);
 route.delete("/herramientas/:id",controller.deleteHerramienta);
+
+export default route;

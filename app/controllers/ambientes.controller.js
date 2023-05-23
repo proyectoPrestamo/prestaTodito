@@ -7,7 +7,7 @@ import { pool } from "../config/database/db";
 export const findAllAmbientes = async (req, res) => {
 
     try {
-       const [rows] = await proyectoinsumos.query("CALL spFindAllAmbientes();");
+       const [rows] = await pool.query("CALL spFindAllAmbientes();");
        res.json(rows);
     } catch (error) {
        console.error("Ha ocurrido un error");
@@ -15,9 +15,9 @@ export const findAllAmbientes = async (req, res) => {
     }
  };
  export const findAmbientes = async (req, res) => {
-    const id_ambientes = req.params.id_ambientes;
+    const id = req.params.id;
     try {
-       const [rows] = await proyectoinsumos.query(`CALL spFindAmbientes(${id_ambientes});`);
+       const [rows] = await pool.query(`CALL spFindAmbientes(${id});`);
        res.json(rows);
     } catch (error) {
        console.error("Ha ocurrido un error");
@@ -25,13 +25,18 @@ export const findAllAmbientes = async (req, res) => {
     }
  };
  export const insertAmbientes = async (req, res) => {
+   
     const cantidad_sillas = req.body.cantidad_sillas;
     const cantidad_mesas = req.body.cantidad_mesas;
     const num_aprendices = req.body.num_aprendices;
     const num_equipos = req.body.num_equipos;
+    const id_herramientas = req.body.id_herramientas;
+    const id_horario = req.body.id_horario;
+    const id_material = req.body.id_material;
+
  
     try {
-       const result = await proyectoinsumos.query(`CALL spInsertAmbientes('${cantidad_sillas},${cantidad_mesas},${num_aprendices},${num_equipos}');`);
+       const result = await pool.query(`CALL spInsertAmbientes('${cantidad_sillas}','${cantidad_mesas}','${num_aprendices}','${num_equipos}','${id_herramientas}','${id_horario}','${id_material}');`);
        res.json(result);
     } catch (error) {
        console.error("Ha ocurrido un error" + error);
@@ -39,9 +44,9 @@ export const findAllAmbientes = async (req, res) => {
  
  };
  export const deleteAmbientes = async (req, res) => {
-    const id_ambientes = req.params.id_ambientes;
+    const id = req.params.id;
     try {
-       const result = await proyectoinsumos.query(`CALL spDeleteAmbientes(${id_ambientes})`);
+       const result = await pool.query(`CALL spDeleteAmbientes(${id})`);
        if (result[0].affectedRows == 1)
           res.json(result);
        else
@@ -54,14 +59,18 @@ export const findAllAmbientes = async (req, res) => {
  };
  export const updateAmbientes = async (req, res) => {
  
-    const id_ambientes = req.body.id_ambientes;
+    const id = req.params.id;
     const cantidad_sillas = req.body.cantidad_sillas;
     const cantidad_mesas = req.body.cantidad_mesas;
     const num_aprendices = req.body.num_aprendices;
     const num_equipos = req.body.num_equipos;
+    const id_herramienta = req.body.id_herramienta;
+    const id_horario = req.body.id_horario;
+    const id_material = req.body.id_material;
+
  
     try {
-       const result = await proyectoinsumos.query(`CALL spUpdateAmbientes(${id_ambientes},${cantidad_sillas},${cantidad_mesas},${num_aprendices},${num_equipos}');`)
+       const result = await pool.query(`CALL spUpdateAmbientes(${id},'${cantidad_sillas}','${cantidad_mesas}','${num_aprendices}','${num_equipos}','${id_herramienta}','${id_horario}','${id_material}');`)
        if (result[0].affectedRows != 0)
           res.json(result);
        else

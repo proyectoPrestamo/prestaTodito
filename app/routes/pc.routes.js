@@ -9,5 +9,7 @@ const route = Router();
 route.get("/pc",controller.findAllPc);
 route.get("/pc/:id",controller.findPc);
 route.post("/pc",controller.insertPc);
-route.put("/pc",controller.updatePc);
+route.put("/pc/:id",controller.updatePc);
 route.delete("/pc/:id",controller.deletePc);
+
+export default route;

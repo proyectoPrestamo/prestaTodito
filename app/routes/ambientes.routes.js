@@ -9,5 +9,7 @@ const route = Router();
 route.get("/ambientes",controller.findAllAmbientes);
 route.get("/ambientes/:id",controller.findAmbientes);
 route.post("/ambientes",controller.insertAmbientes);
-route.put("/ambientes",controller.updateAmbientes);
+route.put("/ambientes/:id",controller.updateAmbientes);
 route.delete("/ambientes/:id",controller.deleteAmbientes);
+
+export default route;

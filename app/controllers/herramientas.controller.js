@@ -6,7 +6,7 @@ import { pool } from "../config/database/db";
 export const findAllHerramienta = async (req, res) => {
 
     try {
-       const [rows] = await proyectoinsumos.query("CALL spFindAllHerramienta();");
+       const [rows] = await pool.query("CALL spFindAllHerramientas();");
        res.json(rows);
     } catch (error) {
        console.error("Ha ocurrido un error");
@@ -14,9 +14,9 @@ export const findAllHerramienta = async (req, res) => {
     }
  };
  export const findHerramienta = async (req, res) => {
-    const id_herramienta = req.params.id_herramienta;
+    const id = req.params.id;
     try {
-       const [rows] = await proyectoinsumos.query(`CALL spFindHerramienta(${id_herramienta});`);
+       const [rows] = await pool.query(`CALL spFindHerramientas(${id});`);
        res.json(rows);
     } catch (error) {
        console.error("Ha ocurrido un error");
@@ -24,23 +24,23 @@ export const findAllHerramienta = async (req, res) => {
     }
  };
  export const insertHerramienta = async (req, res) => {
-    const nombre_herra = req.body.nombre;
-    const estado_herra = req.body.estado;
-    const tipo_herra = req.body.tipo;
-    const cantidad_herra = req.body.cantidad;
+    const nombre = req.body.nombre;
+    const estado = req.body.estado;
+    const tipo = req.body.tipo;
+    const cantidad = req.body.cantidad;
+    const id_horario = req.body.id_horario;
  
     try {
-       const result = await proyectoinsumos.query(`CALL spInsertHerramienta('${nombre_herra}','${estado_herra}','${tipo_herra}','${cantidad_herra}');`);
+       const result = await pool.query(`CALL spInsertHerramientas('${nombre}','${estado}','${tipo}','${cantidad}','${id_horario}');`);
        res.json(result);
     } catch (error) {
        console.error("Ha ocurrido un error" + error);
     }
- 
  };
  export const deleteHerramienta = async (req, res) => {
-    const id_herramienta = req.params.id_herramienta;
+    const id = req.params.id;
     try {
-       const result = await proyectoinsumos.query(`CALL spDeleteHerramienta(${id_herramienta})`);
+       const result = await pool.query(`CALL spDeleteHerramientas(${id})`);
        if (result[0].affectedRows == 1)
           res.json(result);
        else
@@ -52,15 +52,15 @@ export const findAllHerramienta = async (req, res) => {
  
  };
  export const updateHerramienta = async (req, res) => {
-    const id_herramienta = req.params.id_herramienta;
-    const nombre_herra = req.body.nombre;
-    const estado_herra = req.body.estado;
-    const tipo_herra = req.body.tipo;
-    const cantidad_herra = req.body.cantidad;
-    const id_horario = req.params.id_horario;
+    const id = req.params.id;
+    const nombre = req.body.nombre;
+    const estado = req.body.estado;
+    const tipo = req.body.tipo;
+    const cantidad = req.body.cantidad;
+    const id_horario = req.body.id_horario;
  
     try {
-       const result = await proyectoinsumos.query(`CALL spUpdateHerramienta(${id_herramienta},'${nombre_herra}','${estado_herra}','${tipo_herra}','${cantidad_herra}','${id_horario}');`)
+       const result = await pool.query(`CALL spUpdateHerramientas(${id},'${nombre}','${estado}','${tipo}','${cantidad}','${id_horario}');`)
        if (result[0].affectedRows != 0)
           res.json(result);
        else

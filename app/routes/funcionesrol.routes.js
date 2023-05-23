@@ -9,6 +9,7 @@ const route = Router();
 route.get("/funcionesrol",controller.findAllFuncionesRol);
 route.get("/funcionesrol/:id",controller.findFuncionesRol);
 route.post("/funcionesrol",controller.insertFuncionesRol);
-route.put("/funcionesrol",controller.updateFuncionesRol);
+route.put("/funcionesrol/:id",controller.updateFuncionesRol);
 route.delete("/funcionesrol/:id",controller.deleteFuncionesRol);
 
+export default route;

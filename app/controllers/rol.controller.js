@@ -13,9 +13,9 @@ export const findAllRol = async (req, res) => {
 };
 
 export const findRol = async (req, res) => {
-   const id_rol = req.params.id_rol;
+   const id = req.params.id;
    try {
-      const [rows] = await pool.query(`CALL spFindRol('${id_rol}');`);
+      const [rows] = await pool.query(`CALL spFindRol('${id}');`);
       res.json(rows);
    } catch (error) {
       console.error("Ha ocurrido un error"+ error);

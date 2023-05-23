@@ -12,18 +12,8 @@ const route = Router();
 route.get("/registro",controller.findAllRegistro);
 route.get("/registro/:id",controller.findRegistro);
 route.post("/registro",controller.insertRegistro);
-route.put("/registro",controller.updateRegistro);
+route.put("/registro/:id",controller.updateRegistro);
 route.delete("/registro/:id",controller.deleteRegistro);
-
-
-
-
-
-
-
-
-
-
 
 
 export default route;
