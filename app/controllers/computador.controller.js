@@ -3,42 +3,43 @@ import { pool } from "../config/database/db";
 
 //Prestamo Computadoras
 
-export const findAllPc = async (req, res) => {
+export const findAllComputador = async (req, res) => {
 
     try {
-       const [rows] = await pool.query("CALL spFindAllPc();");
+       const [rows] = await pool.query("CALL spFindAllComputador();");
        res.json(rows);
     } catch (error) {
        console.error("Ha ocurrido un error");
  
     }
  };
- export const findPc = async (req, res) => {
+ export const findComputador = async (req, res) => {
     const id = req.params.id;
     try {
-       const [rows] = await pool.query(`CALL spFindPc(${id});`);
+       const [rows] = await pool.query(`CALL spFindComputador(${id});`);
        res.json(rows);
     } catch (error) {
        console.error("Ha ocurrido un error");
  
     }
  };
- export const insertPc = async (req, res) => {
-    const estado_pc = req.body.estado;
-    const marca_pc = req.body.marca;
-    const id_horario = req.body.id_horario;
+ export const insertComputador = async (req, res) => {
+    
+    const marca = req.body.marca;
+    const cargador = req.body.cargador;
+    const mouse = req.body.mouse;
     try {
-       const result = await pool.query(`CALL spInsertPc('${estado_pc}','${marca_pc}','${id_horario}');`);
+       const result = await pool.query(`CALL spInsertComputador('${marca}','${cargador}','${mouse}');`);
        res.json(result);
     } catch (error) {
        console.error("Ha ocurrido un error" + error);
     }
  
  };
- export const deletePc = async (req, res) => {
+ export const deleteComputador = async (req, res) => {
     const id = req.params.id;
     try {
-       const result = await pool.query(`CALL spDeletePc(${id})`);
+       const result = await pool.query(`CALL spDeleteComputador(${id})`);
        if (result[0].affectedRows == 1)
           res.json(result);
        else
@@ -49,16 +50,16 @@ export const findAllPc = async (req, res) => {
     }
  
  };
- export const updatePc = async (req, res) => {
+ export const updateComputador = async (req, res) => {
  
     const id = req.params.id;
-    const estado_pc = req.body.estado;
-    const marca_pc = req.body.marca;
-    const id_horario = req.body.id_horario;
+    const marca = req.body.marca;
+    const cargador = req.body.cargador;
+    const mouse = req.body.mouse;
  
  
     try {
-       const result = await pool.query(`CALL spUpdatePc('${id}','${estado_pc}','${marca_pc}','${id_horario}');`)
+       const result = await pool.query(`CALL spUpdateComputador('${id}','${marca}','${cargador}','${mouse}');`)
        if (result[0].affectedRows != 0)
           res.json(result);
        else

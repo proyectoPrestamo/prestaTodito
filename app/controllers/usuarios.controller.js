@@ -4,11 +4,11 @@ import { pool } from "../config/database/db";
 
 // ejecucion de procedimientos almacenados
 
-//Prestamo
-export const findAllPrestamos= async (req, res) => {
+//Usuario
+export const findAllUsuario= async (req, res) => {
 
    try {
-      const [rows] = await pool.query("CALL spFindAllPrestamo();");
+      const [rows] = await pool.query("CALL spFindAllUsuario();");
       res.json(rows);
    } catch (error) {
       console.error("Ha ocurrido un error");
@@ -16,17 +16,17 @@ export const findAllPrestamos= async (req, res) => {
    }
 };
 
-export const findPrestamos= async (req, res) => {
+export const findUsuario= async (req, res) => {
    const id = req.params.id;
    try {
-      const [rows] = await pool.query(`CALL spFindPrestamo(${id});`);
+      const [rows] = await pool.query(`CALL spFindUsuario(${id});`);
       res.json(rows);
    } catch (error) {
       console.error("Ha ocurrido un error");
 
    }
 };
-export const insertPrestamos= async (req, res) => {
+export const insertUsuario= async (req, res) => {
    const nombre = req.body.nombre;
    const apellido = req.body.apellido;
    const tipo_documento = req.body.tipo_documento;
@@ -43,7 +43,7 @@ export const insertPrestamos= async (req, res) => {
 
 
    try {
-      const result = await pool.query(`CALL spInsertPrestamo('${nombre}','${apellido}','${tipo_documento}','${numero_documento}',
+      const result = await pool.query(`CALL spInsertUsuario('${nombre}','${apellido}','${tipo_documento}','${numero_documento}',
        '${correo}','${telefono}','${direccion}','${jornada}','${programa_formacion}','${numero_ficha}','${genero}','${contrasena}','${id_rol}');`);
       res.json(result);
    } catch (error) {
@@ -51,10 +51,10 @@ export const insertPrestamos= async (req, res) => {
    }
 
 };
-export const deletePrestamos= async (req, res) => {
+export const deleteUsuario= async (req, res) => {
    const id = req.params.id;
    try {
-      const result = await pool.query(`CALL spDeletePrestamo(${id})`);
+      const result = await pool.query(`CALL spDeleteUsuario(${id})`);
       if (result[0].affectedRows == 1)
          res.json(result);
       else
@@ -66,7 +66,7 @@ export const deletePrestamos= async (req, res) => {
 
 };
 
-export const updatePrestamos= async (req, res) => {
+export const updateUsuario= async (req, res) => {
    const id = req.params.id
    const nombre = req.body.nombre;
    const apellido = req.body.apellido;
@@ -83,7 +83,7 @@ export const updatePrestamos= async (req, res) => {
    const id_rol = req.body.id_rol;
 
    try {
-      const result = await pool.query(`CALL spUpdatePrestamo('${id}','${nombre}','${apellido}','${tipo_documento}','${numero_documento}',
+      const result = await pool.query(`CALL spUpdateUsuario('${id}','${nombre}','${apellido}','${tipo_documento}','${numero_documento}',
        '${correo}','${telefono}','${direccion}','${jornada}','${programa_formacion}','${numero_ficha}','${genero}','${contrasena}','${id_rol}');`);
       if (result[0].affectedRows != 0)
          res.json(result);

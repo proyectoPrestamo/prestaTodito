@@ -8,16 +8,16 @@ import message from "./config/message";
 // Rutas de la api
 
 import ambientesRoutes from "./routes/ambientes.routes";
-import funcionesrolRoutes from "./routes/funcionesrol.routes"
-
+import computadorRoutes from "./routes/computador.routes";
+import elementosRoutes from "./routes/elementos.routes"
 import herramientasRoutes from "./routes/herramientas.routes";
-import horarioRoutes from "./routes/horario.routes";
 import inventarioRoutes from "./routes/inventario.routes"
-
 import materialRoutes from "./routes/material.routes";
-import pcRoutes from "./routes/pc.routes";
-import registroRoutes from "./routes/registro.routes"
+import prestamosRoutes from "./routes/prestamos.routes";
+import resElemRoutes from "./routes/resElem.routes";
+import reservaRoutes from "./routes/reserva.routes"
 import rolRoutes from "./routes/rol.routes";
+import usuarioRoutes from "./routes/usuario.routes";
 
 const app = express();
 
@@ -37,14 +37,16 @@ app.get('/',(req, res) =>{
 
 
 app.use('/api', ambientesRoutes);
-app.use('/api', funcionesrolRoutes);
+app.use('/api', computadorRoutes);
+app.use('/api', elementosRoutes);
 app.use('/api', herramientasRoutes);
-app.use('/api', horarioRoutes);
 app.use('/api', inventarioRoutes);
 app.use('/api', materialRoutes);
-app.use('/api', pcRoutes);
-app.use('/api', registroRoutes);
+app.use('/api', prestamosRoutes);
+app.use('/api', resElemRoutes);
+app.use('/api', reservaRoutes);
 app.use('/api', rolRoutes);
+app.use('/api',usuarioRoutes);
 
 
 export default app;

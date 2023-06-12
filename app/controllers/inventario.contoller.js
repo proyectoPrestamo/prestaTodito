@@ -25,14 +25,16 @@ export const findAllInventario= async (req, res) => {
     }
  };
  export const insertInventario= async (req, res) => {
-    const id_pc = req.body.id_pc;
+    const cantidad = req.body.cantidad;
+    const fecha_registro = req.body.fecha_registro;
+    const estado = req.body.estado;
+    const id_computador = req.body.id_computador;
     const id_herramienta = req.body.id_herramienta;
-    const id_ambientes = req.body.id_ambientes;
-    const id_horario = req.body.id_horario;
+    const id_ambientes = req.body.id_ambientes
     const id_material = req.body.id_material
  
     try {
-       const result = await pool.query(`CALL spInsertInventario('${id_pc}','${id_herramienta}','${id_ambientes}','${id_horario}','${id_material}');`);
+       const result = await pool.query(`CALL spInsertInventario('${cantidad}','${fecha_registro}','${estado}','${id_computador}','${id_herramienta}','${id_ambientes}','${id_material}');`);
        res.json(result);
     } catch (error) {
        console.error("Ha ocurrido un error" + error);
@@ -54,16 +56,18 @@ export const findAllInventario= async (req, res) => {
  
  };
  export const updateInventario = async (req, res) => {
-    const id = req.params.id;
-    const id_pc = req.body.id_pc;
-    const id_herramienta = req.body.id_herramienta;
-    const id_ambientes = req.body.id_ambientes;
-    const id_horario = req.body.id_horario;
-    const id_material = req.body.id_material
+   const id = req.body.id;
+   const cantidad = req.body.cantidad;
+   const fecha_registro = req.body.fecha_registro;
+   const estado = req.body.estado;
+   const id_computador = req.body.id_computador;
+   const id_herramienta = req.body.id_herramienta;
+   const id_ambientes = req.body.id_ambientes
+   const id_material = req.body.id_material
  
  
     try {
-       const result = await pool.query(`CALL spUpdateInventario(${id},'${id_pc}','${id_herramienta}','${id_ambientes}','${id_horario}','${id_material}');`)
+       const result = await pool.query(`CALL spUpdateInventario(${id},'${cantidad}','${fecha_registro}','${estado}','${id_computador}','${id_herramienta}','${id_ambientes}','${id_material}');`)
        if (result[0].affectedRows != 0)
           res.json(result);
        else

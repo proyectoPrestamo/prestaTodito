@@ -1,12 +1,12 @@
 //  importamos la base de datos para hacer la consulta
 import { pool } from "../config/database/db";
 
-//HERRAMIENTAS
+//Herramienta
 
 export const findAllHerramienta = async (req, res) => {
 
     try {
-       const [rows] = await pool.query("CALL spFindAllHerramientas();");
+       const [rows] = await pool.query("CALL spFindAllHerramienta();");
        res.json(rows);
     } catch (error) {
        console.error("Ha ocurrido un error");
@@ -16,7 +16,7 @@ export const findAllHerramienta = async (req, res) => {
  export const findHerramienta = async (req, res) => {
     const id = req.params.id;
     try {
-       const [rows] = await pool.query(`CALL spFindHerramientas(${id});`);
+       const [rows] = await pool.query(`CALL spFindHerramienta(${id});`);
        res.json(rows);
     } catch (error) {
        console.error("Ha ocurrido un error");
@@ -24,14 +24,12 @@ export const findAllHerramienta = async (req, res) => {
     }
  };
  export const insertHerramienta = async (req, res) => {
-    const nombre = req.body.nombre;
-    const estado = req.body.estado;
     const tipo = req.body.tipo;
-    const cantidad = req.body.cantidad;
-    const id_horario = req.body.id_horario;
+    const color = req.body.color;
+    
  
     try {
-       const result = await pool.query(`CALL spInsertHerramientas('${nombre}','${estado}','${tipo}','${cantidad}','${id_horario}');`);
+       const result = await pool.query(`CALL spInsertHerramienta('${tipo}','${color}');`);
        res.json(result);
     } catch (error) {
        console.error("Ha ocurrido un error" + error);
@@ -40,7 +38,7 @@ export const findAllHerramienta = async (req, res) => {
  export const deleteHerramienta = async (req, res) => {
     const id = req.params.id;
     try {
-       const result = await pool.query(`CALL spDeleteHerramientas(${id})`);
+       const result = await pool.query(`CALL spDeleteHerramienta(${id})`);
        if (result[0].affectedRows == 1)
           res.json(result);
        else
@@ -52,15 +50,12 @@ export const findAllHerramienta = async (req, res) => {
  
  };
  export const updateHerramienta = async (req, res) => {
-    const id = req.params.id;
-    const nombre = req.body.nombre;
-    const estado = req.body.estado;
-    const tipo = req.body.tipo;
-    const cantidad = req.body.cantidad;
-    const id_horario = req.body.id_horario;
+   const id = req.body.id;
+   const tipo = req.body.tipo;
+    const color = req.body.color;
  
     try {
-       const result = await pool.query(`CALL spUpdateHerramientas(${id},'${nombre}','${estado}','${tipo}','${cantidad}','${id_horario}');`)
+       const result = await pool.query(`CALL spUpdateHerramienta(${id},'${tipo}','${color}');`)
        if (result[0].affectedRows != 0)
           res.json(result);
        else

@@ -2,45 +2,46 @@
 import { pool } from "../config/database/db";
 
 
-//HORARIO
+//Reserva
 
-export const findAllHorario = async (req, res) => {
+export const findAllReserva = async (req, res) => {
 
     try {
-       const [rows] = await pool.query("CALL spFindAllHorario();");
+       const [rows] = await pool.query("CALL spFindAllReserva();");
        res.json(rows);
     } catch (error) {
        console.error("Ha ocurrido un error");
  
     }
  };
- export const findHorario = async (req, res) => {
+ export const findReserva = async (req, res) => {
     const id = req.params.id;
     try {
-       const [rows] = await pool.query(`CALL spFindHorario(${id});`);
+       const [rows] = await pool.query(`CALL spFindReserva(${id});`);
        res.json(rows);
     } catch (error) {
        console.error("Ha ocurrido un error");
  
     }
  };
- export const insertHorario = async (req, res) => {
-    const fecha_hora = req.body.fecha_hora;
+ export const insertReserva = async (req, res) => {
+    const fecha_res = req.body.fecha_res;
+    const hosra_res = req.body.hosra_res
     const tiempo_requerido = req.body.tiempo_requerido;
-    const fecha_registro = req.body.fecha_registro;
+    const id_usuario = req.body.id_usuario;
  
     try {
-       const result = await pool.query(`CALL spInsertHorario('${fecha_hora}','${tiempo_requerido}','${fecha_registro}');`);
+       const result = await pool.query(`CALL spInsertReserva('${fecha_res}','${hosra_res}','${tiempo_requerido}','${id_usuario}');`);
        res.json(result);
     } catch (error) {
        console.error("Ha ocurrido un error" + error);
     }
  
  };
- export const deleteHorario = async (req, res) => {
+ export const deleteReserva = async (req, res) => {
     const id = req.params.id;
     try {
-       const result = await pool.query(`CALL spDeleteHorario(${id})`);
+       const result = await pool.query(`CALL spDeleteReserva(${id})`);
        if (result[0].affectedRows == 1)
           res.json(result);
        else
@@ -51,14 +52,15 @@ export const findAllHorario = async (req, res) => {
     }
  
  };
- export const updateHorario = async (req, res) => {
+ export const updateReserva = async (req, res) => {
     const id = req.params.id;
-    const fecha_hora = req.body.fecha_hora;
+    const fecha_res = req.body.fecha_res;
+    const hosra_res = req.body.hosra_res
     const tiempo_requerido = req.body.tiempo_requerido;
-    const fecha_registro = req.body.fecha_registro;
+    const id_usuario = req.body.id_usuario;
  
     try {
-       const result = await pool.query(`CALL spUpdateHorario(${id},'${fecha_hora}','${tiempo_requerido}','${fecha_registro}');`)
+       const result = await pool.query(`CALL spUpdateReserva(${id},'${fecha_res}','${hosra_res}','${tiempo_requerido}','${id_usuario}');`)
        if (result[0].affectedRows != 0)
           res.json(result);
        else
@@ -69,4 +71,6 @@ export const findAllHorario = async (req, res) => {
  
     }
  };
+
+ 
  
