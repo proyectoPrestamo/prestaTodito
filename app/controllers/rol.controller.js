@@ -24,12 +24,12 @@ export const findRol = async (req, res) => {
 };
 
 export const insertRol = async (req, res) => {
-   const nombre_rol = req.body.nombre_rol;
-   const estado_rol = req.body.estado_rol;
+   const nombre = req.body.nombre;
+   const estado = req.body.estado;
  
 
    try {
-      const result = await pool.query(`CALL spInsertRol('${nombre_rol}','${estado_rol}');`);
+      const result = await pool.query(`CALL spInsertRol('${nombre}','${estado}');`);
       res.json(result);
    } catch (error) {
       console.error("Ha ocurrido un error" + error);
@@ -53,11 +53,11 @@ export const deleteRol = async (req, res) => {
 
 export const updateRol = async (req, res) => {
    const id = req.params.id;
-   const nombre_rol = req.body.nombre_rol;
-   const estado_rol = req.body.estado_rol;
+   const nombre = req.body.nombre;
+   const estado = req.body.estado;
 
    try {
-      const result = await pool.query(`CALL spUpdateRol(${id},'${nombre_rol}','${estado_rol}');`)
+      const result = await pool.query(`CALL spUpdateRol(${id},'${nombre}','${estado}');`)
       if (result[0].affectedRows != 0)
          res.json(result);
       else
