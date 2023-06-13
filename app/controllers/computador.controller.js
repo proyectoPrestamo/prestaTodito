@@ -24,12 +24,11 @@ export const findAllComputador = async (req, res) => {
     }
  };
  export const insertComputador = async (req, res) => {
-   const id = req.body.id;
     const marca = req.body.marca;
     const cargador = req.body.cargador;
     const mouse = req.body.mouse;
     try {
-       const result = await pool.query(`CALL spInsertComputador('${id}','${marca}','${cargador}','${mouse}');`);
+       const result = await pool.query(`CALL spInsertComputador('${marca}','${cargador}','${mouse}');`);
        res.json(result);
     } catch (error) {
        console.error("Ha ocurrido un error" + error);

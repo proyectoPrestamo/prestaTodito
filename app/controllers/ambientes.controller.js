@@ -56,7 +56,6 @@ export const findAllAmbientes = async (req, res) => {
  
  };
  export const updateAmbientes = async (req, res) => {
- 
     const id = req.params.id;
     const cantidad_sillas = req.body.cantidad_sillas;
     const cantidad_mesas = req.body.cantidad_mesas;

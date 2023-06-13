@@ -27,10 +27,10 @@ export const findUsuario= async (req, res) => {
    }
 };
 export const insertUsuario= async (req, res) => {
+   const id = req.body.id;
    const nombre = req.body.nombre;
    const apellido = req.body.apellido;
    const tipo_documento = req.body.tipo_documento;
-   const numero_documento = req.body.numero_documento;
    const correo = req.body.correo;
    const telefono = req.body.telefono;
    const direccion = req.body.direccion;
@@ -43,7 +43,7 @@ export const insertUsuario= async (req, res) => {
 
 
    try {
-      const result = await pool.query(`CALL spInsertUsuario('${nombre}','${apellido}','${tipo_documento}','${numero_documento}',
+      const result = await pool.query(`CALL spInsertUsuario('${id}','${nombre}','${apellido}','${tipo_documento}',
        '${correo}','${telefono}','${direccion}','${jornada}','${programa_formacion}','${numero_ficha}','${genero}','${contrasena}','${id_rol}');`);
       res.json(result);
    } catch (error) {
@@ -71,7 +71,6 @@ export const updateUsuario= async (req, res) => {
    const nombre = req.body.nombre;
    const apellido = req.body.apellido;
    const tipo_documento = req.body.tipo_documento;
-   const numero_documento = req.body.numero_documento;
    const correo = req.body.correo;
    const telefono = req.body.telefono;
    const direccion = req.body.direccion;
@@ -83,7 +82,7 @@ export const updateUsuario= async (req, res) => {
    const id_rol = req.body.id_rol;
 
    try {
-      const result = await pool.query(`CALL spUpdateUsuario('${id}','${nombre}','${apellido}','${tipo_documento}','${numero_documento}',
+      const result = await pool.query(`CALL spUpdateUsuario('${id}','${nombre}','${apellido}','${tipo_documento}',
        '${correo}','${telefono}','${direccion}','${jornada}','${programa_formacion}','${numero_ficha}','${genero}','${contrasena}','${id_rol}');`);
       if (result[0].affectedRows != 0)
          res.json(result);

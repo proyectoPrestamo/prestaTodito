@@ -31,12 +31,13 @@ export const insertPrestamos= async (req, res) => {
    const fechaPrestamo = req.body.fechaPrestamo;
    const final_prestamo = req.body.final_prestamo;
    const observaciones = req.body.observaciones;
+   const img = req.body.img;
    const id_usuario = req.body.id_usuario;
 
 
 
    try {
-      const result = await pool.query(`CALL spInsertPrestamos('${fechaPrestamo}','${final_prestamo}','${observaciones}',
+      const result = await pool.query(`CALL spInsertPrestamos('${fechaPrestamo}','${final_prestamo}','${observaciones}','${img}',
        '${id_usuario}');`);
       res.json(result);
    } catch (error) {
@@ -64,11 +65,12 @@ export const updatePrestamos= async (req, res) => {
    const fechaPrestamo = req.body.fechaPrestamo;
    const final_prestamo = req.body.final_prestamo;
    const observaciones = req.body.observaciones;
+   const img = req.body.img;
    const id_usuario = req.body.id_usuario;
 
 
    try {
-      const result = await pool.query(`CALL spUpdatePrestamos('${id}','${fechaPrestamo}','${final_prestamo}','${observaciones}',
+      const result = await pool.query(`CALL spUpdatePrestamos('${id}','${fechaPrestamo}','${final_prestamo}','${observaciones}','${img}',
        '${id_usuario}');`);
       if (result[0].affectedRows != 0)
          res.json(result);

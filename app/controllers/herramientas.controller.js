@@ -24,13 +24,12 @@ export const findAllHerramienta = async (req, res) => {
     }
  };
  export const insertHerramienta = async (req, res) => {
-   const id = req.body.id;
     const tipo = req.body.tipo;
     const color = req.body.color;
     
  
     try {
-       const result = await pool.query(`CALL spInsertHerramienta('${id}','${tipo}','${color}');`);
+       const result = await pool.query(`CALL spInsertHerramienta('${tipo}','${color}');`);
        res.json(result);
     } catch (error) {
        console.error("Ha ocurrido un error" + error);
