@@ -5,7 +5,7 @@ import { Router } from "express";
 import * as controller from "../controllers/elementos.controller"
 const route = Router();
 
-//funciones rol
+//Elementos
 route.get("/elementos",controller.findAllElementos);
 route.get("/elementos/:id",controller.findElementos);
 route.post("/elementos",controller.insertElementos);

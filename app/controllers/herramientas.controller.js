@@ -24,12 +24,13 @@ export const findAllHerramienta = async (req, res) => {
     }
  };
  export const insertHerramienta = async (req, res) => {
+   const id = req.body.id;
     const tipo = req.body.tipo;
     const color = req.body.color;
     
  
     try {
-       const result = await pool.query(`CALL spInsertHerramienta('${tipo}','${color}');`);
+       const result = await pool.query(`CALL spInsertHerramienta('${id}','${tipo}','${color}');`);
        res.json(result);
     } catch (error) {
        console.error("Ha ocurrido un error" + error);
@@ -50,12 +51,12 @@ export const findAllHerramienta = async (req, res) => {
  
  };
  export const updateHerramienta = async (req, res) => {
-   const id = req.body.id;
+   const id = req.params.id;
    const tipo = req.body.tipo;
     const color = req.body.color;
  
     try {
-       const result = await pool.query(`CALL spUpdateHerramienta(${id},'${tipo}','${color}');`)
+       const result = await pool.query(`CALL spUpdateHerramienta('${id}','${tipo}','${color}');`);
        if (result[0].affectedRows != 0)
           res.json(result);
        else

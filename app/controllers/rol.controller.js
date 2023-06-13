@@ -24,12 +24,13 @@ export const findRol = async (req, res) => {
 };
 
 export const insertRol = async (req, res) => {
-   const nombre_rol = req.body.nombre_rol;
+   const id_rol = req.body.id_rol;
+   const nombre_rol= req.body.nombre_rol;
    const estado = req.body.estado;
  
 
    try {
-      const result = await pool.query(`CALL spInsertRol('${nombre_rol}','${estado}');`);
+      const result = await pool.query(`CALL spInsertRol('${id_rol}','${nombre_rol}','${estado}');`);
       res.json(result);
    } catch (error) {
       console.error("Ha ocurrido un error" + error);

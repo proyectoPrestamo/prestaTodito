@@ -56,7 +56,7 @@ export const findAllInventario= async (req, res) => {
  
  };
  export const updateInventario = async (req, res) => {
-   const id = req.body.id;
+   const id = req.params.id;
    const cantidad = req.body.cantidad;
    const fecha_registro = req.body.fecha_registro;
    const estado = req.body.estado;

@@ -51,7 +51,7 @@ export const findAllMaterial = async (req, res) => {
  
  };
  export const updateMaterial = async (req, res) => {
-   const id = req.bidy.id;
+   const id = req.params.id;
    const tipo = req.body.tipo;
    const color = req.body.color;
    const medida = req.body.medida;
