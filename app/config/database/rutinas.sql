@@ -437,3 +437,18 @@ BEGIN
     WHERE ID_ELEMENTOS = _ID_ELEMENTO;
 END //
 DELIMITER ;
+
+-- user
+
+DELIMITER //
+CREATE PROCEDURE spFindUser( IN _id_usuario INT,
+    IN _contrasena VARCHAR(100),
+    IN _id_rol VARCHAR(100))
+BEGIN
+    SELECT ID_USUARIO, CONTRASENA, ID_ROL
+    FROM usuario
+    WHERE ID_USUARIO = _id_usuario
+        AND CONTRASENA = _contrasena
+        AND ID_ROL = _id_rol;
+END //
+DELIMITER ;

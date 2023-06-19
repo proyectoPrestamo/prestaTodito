@@ -24,12 +24,13 @@ export const findAllMaterial = async (req, res) => {
     }
  };
  export const insertMaterial = async (req, res) => {
+   const nombre = req.body.nombre;
     const tipo = req.body.tipo;
     const color = req.body.color;
     const medidas = req.body.medidas;
  
     try {
-       const result = await pool.query(`CALL spInsertMaterial('${tipo}','${color}','${medidas}');`);
+       const result = await pool.query(`CALL spInsertMaterial('${nombre}','${tipo}','${color}','${medidas}');`);
        res.json(result);
     } catch (error) {
        console.error("Ha ocurrido un error" + error);
@@ -52,12 +53,13 @@ export const findAllMaterial = async (req, res) => {
  };
  export const updateMaterial = async (req, res) => {
    const id = req.params.id;
+   const nombre = req.body.nombre;
    const tipo = req.body.tipo;
    const color = req.body.color;
    const medidas = req.body.medidas;
  
     try {
-       const result = await pool.query(`CALL spUpdateMaterial(${id},'${tipo}','${color}','${medidas}');`);
+       const result = await pool.query(`CALL spUpdateMaterial(${id},'${nombre}','${tipo}','${color}','${medidas}');`);
        if (result[0].affectedRows != 0)
           res.json(result);
        else

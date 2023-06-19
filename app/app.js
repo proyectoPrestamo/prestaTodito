@@ -18,6 +18,7 @@ import resElemRoutes from "./routes/resElem.routes";
 import reservaRoutes from "./routes/reserva.routes"
 import rolRoutes from "./routes/rol.routes";
 import usuarioRoutes from "./routes/usuario.routes";
+import loginRoutes from "./routes/login.routes";
 
 const app = express();
 
@@ -47,6 +48,7 @@ app.use('/api', resElemRoutes);
 app.use('/api', reservaRoutes);
 app.use('/api', rolRoutes);
 app.use('/api',usuarioRoutes);
+app.use('/api',loginRoutes);
 
 
 export default app;

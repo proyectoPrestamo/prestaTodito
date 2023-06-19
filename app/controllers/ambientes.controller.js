@@ -25,7 +25,7 @@ export const findAllAmbientes = async (req, res) => {
     }
  };
  export const insertAmbientes = async (req, res) => {
-   const id = req.body.id;
+   const id_ambiente = req.body.id_ambiente;
     const cantidad_sillas = req.body.cantidad_sillas;
     const cantidad_mesas = req.body.cantidad_mesas;
     const num_aprendices = req.body.num_aprendices;
@@ -34,7 +34,7 @@ export const findAllAmbientes = async (req, res) => {
 
  
     try {
-       const result = await pool.query(`CALL spInsertAmbientes('${id}','${cantidad_sillas}','${cantidad_mesas}','${num_aprendices}','${num_equipos}');`);
+       const result = await pool.query(`CALL spInsertAmbientes('${id_ambiente}','${cantidad_sillas}','${cantidad_mesas}','${num_aprendices}','${num_equipos}');`);
        res.json(result);
     } catch (error) {
        console.error("Ha ocurrido un error" + error);
