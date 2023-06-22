@@ -25,7 +25,7 @@ export const findRol = async (req, res) => {
 
 export const insertRol = async (req, res) => {
    const nombre_rol= req.body.nombre_rol;
-   const estado = req.body.estado;
+  const estado = req.body.estado === 'activo';
  
 
    try {
@@ -67,3 +67,5 @@ export const updateRol = async (req, res) => {
       console.error(error);
    }
 };
+
+//
