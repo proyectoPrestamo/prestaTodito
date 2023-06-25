@@ -29,7 +29,7 @@ export const findAllHerramienta = async (req, res) => {
     
  
     try {
-       const result = await pool.query(`CALL spInsertHerramienta('${tipo}','${color}');`);
+       const result = await pool.query(`CALL spInsertHerramienta('${tipo}','${tipo}','${color}');`);
        res.json(result);
     } catch (error) {
        console.error("Ha ocurrido un error" + error);
