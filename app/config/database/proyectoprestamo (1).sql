@@ -3,9 +3,9 @@
 -- https://www.phpmyadmin.net/
 --
 -- Servidor: 127.0.0.1
--- Tiempo de generación: 25-06-2023 a las 10:16:30
+-- Tiempo de generación: 25-06-2023 a las 17:08:09
 -- Versión del servidor: 10.4.28-MariaDB
--- Versión de PHP: 8.0.28
+-- Versión de PHP: 8.2.4
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 START TRANSACTION;
@@ -251,9 +251,9 @@ CREATE DEFINER=`root`@`localhost` PROCEDURE `spInsertAmbientes` (IN `_ID_AMBIENT
 END$$
 
 DROP PROCEDURE IF EXISTS `spInsertComputador`$$
-CREATE DEFINER=`root`@`localhost` PROCEDURE `spInsertComputador` (IN `_ID_COMPUTADOR` INT, IN `_MARCA` VARCHAR(100), IN `_CARGADOR` VARCHAR(10), IN `_MOUSE` VARCHAR(10))   BEGIN
-    INSERT INTO computador (ID_COMPUTADOR, MARCA, CARGADOR, MOUSE)
-    VALUES (_ID_COMPUTADOR, _MARCA, _CARGADOR, _MOUSE);
+CREATE DEFINER=`root`@`localhost` PROCEDURE `spInsertComputador` (IN `_MARCA` VARCHAR(100), IN `_CARGADOR` VARCHAR(10), IN `_MOUSE` VARCHAR(10))   BEGIN
+    INSERT INTO computador (MARCA, CARGADOR, MOUSE)
+    VALUES (_MARCA, _CARGADOR, _MOUSE);
 END$$
 
 DROP PROCEDURE IF EXISTS `spInsertElementos`$$
@@ -263,9 +263,9 @@ CREATE DEFINER=`root`@`localhost` PROCEDURE `spInsertElementos` (IN `_ID_PRESTAM
 END$$
 
 DROP PROCEDURE IF EXISTS `spInsertHerramienta`$$
-CREATE DEFINER=`root`@`localhost` PROCEDURE `spInsertHerramienta` (IN `_ID_HERRAMIENTA` INT, IN `_TIPO` VARCHAR(100), IN `_COLOR` VARCHAR(10))   BEGIN
-    INSERT INTO herramienta (ID_HERRAMIENTA, TIPO, COLOR)
-    VALUES (_ID_HERRAMIENTA, _TIPO, _COLOR);
+CREATE DEFINER=`root`@`localhost` PROCEDURE `spInsertHerramienta` (IN `_TIPO` VARCHAR(100), IN `_COLOR` VARCHAR(10))   BEGIN
+    INSERT INTO herramienta (TIPO, COLOR)
+    VALUES (_TIPO, _COLOR);
 END$$
 
 DROP PROCEDURE IF EXISTS `spInsertInventario`$$
@@ -397,12 +397,13 @@ DELIMITER ;
 --
 
 DROP TABLE IF EXISTS `ambientes`;
-CREATE TABLE `ambientes` (
+CREATE TABLE IF NOT EXISTS `ambientes` (
   `ID_AMBIENTES` int(100) NOT NULL,
   `CANT_SILLAS` int(100) DEFAULT NULL,
   `CANT_MESAS` int(100) DEFAULT NULL,
   `NUM_APRENDICES` int(100) DEFAULT NULL,
-  `NUM_EQUIPOS` int(100) DEFAULT NULL
+  `NUM_EQUIPOS` int(100) DEFAULT NULL,
+  PRIMARY KEY (`ID_AMBIENTES`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_general_ci;
 
 --
@@ -410,7 +411,6 @@ CREATE TABLE `ambientes` (
 --
 
 INSERT INTO `ambientes` (`ID_AMBIENTES`, `CANT_SILLAS`, `CANT_MESAS`, `NUM_APRENDICES`, `NUM_EQUIPOS`) VALUES
-(123, 11, 5, 21, 3),
 (220, 2, 2, 2, 4),
 (224, 23, 22, 20, 20),
 (234, 10, 5, 20, 3),
@@ -431,20 +431,21 @@ INSERT INTO `ambientes` (`ID_AMBIENTES`, `CANT_SILLAS`, `CANT_MESAS`, `NUM_APREN
 --
 
 DROP TABLE IF EXISTS `computador`;
-CREATE TABLE `computador` (
-  `ID_COMPUTADOR` int(100) NOT NULL,
+CREATE TABLE IF NOT EXISTS `computador` (
+  `ID_COMPUTADOR` int(100) NOT NULL AUTO_INCREMENT,
   `MARCA` varchar(100) DEFAULT NULL,
   `CARGADOR` varchar(10) DEFAULT NULL,
-  `MOUSE` varchar(10) DEFAULT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_general_ci;
+  `MOUSE` varchar(10) DEFAULT NULL,
+  PRIMARY KEY (`ID_COMPUTADOR`)
+) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=utf8 COLLATE=utf8_general_ci;
 
 --
 -- Volcado de datos para la tabla `computador`
 --
 
 INSERT INTO `computador` (`ID_COMPUTADOR`, `MARCA`, `CARGADOR`, `MOUSE`) VALUES
-(1, 'hp', 'No', 'SI'),
-(2, 'hp', 'No', 'yes');
+(2, 'hp', 'No', 'yes'),
+(3, 'acer', 'Si', 'Si');
 
 -- --------------------------------------------------------
 
@@ -453,11 +454,14 @@ INSERT INTO `computador` (`ID_COMPUTADOR`, `MARCA`, `CARGADOR`, `MOUSE`) VALUES
 --
 
 DROP TABLE IF EXISTS `elementos`;
-CREATE TABLE `elementos` (
-  `ID_ELEMENTOS` int(100) NOT NULL,
+CREATE TABLE IF NOT EXISTS `elementos` (
+  `ID_ELEMENTOS` int(100) NOT NULL AUTO_INCREMENT,
   `ID_PRESTAMOS` int(100) DEFAULT NULL,
-  `ID_INVENTARIO` int(100) DEFAULT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_general_ci;
+  `ID_INVENTARIO` int(100) DEFAULT NULL,
+  PRIMARY KEY (`ID_ELEMENTOS`),
+  KEY `ID_PRESTAMOS` (`ID_PRESTAMOS`),
+  KEY `ID_INVENTARIO` (`ID_INVENTARIO`)
+) ENGINE=InnoDB AUTO_INCREMENT=6 DEFAULT CHARSET=utf8 COLLATE=utf8_general_ci;
 
 -- --------------------------------------------------------
 
@@ -466,19 +470,21 @@ CREATE TABLE `elementos` (
 --
 
 DROP TABLE IF EXISTS `herramienta`;
-CREATE TABLE `herramienta` (
-  `ID_HERRAMIENTA` int(100) NOT NULL,
+CREATE TABLE IF NOT EXISTS `herramienta` (
+  `ID_HERRAMIENTA` int(100) NOT NULL AUTO_INCREMENT,
   `TIPO` varchar(100) DEFAULT NULL,
-  `COLOR` varchar(10) DEFAULT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_general_ci;
+  `COLOR` varchar(10) DEFAULT NULL,
+  PRIMARY KEY (`ID_HERRAMIENTA`)
+) ENGINE=InnoDB AUTO_INCREMENT=7 DEFAULT CHARSET=utf8 COLLATE=utf8_general_ci;
 
 --
 -- Volcado de datos para la tabla `herramienta`
 --
 
 INSERT INTO `herramienta` (`ID_HERRAMIENTA`, `TIPO`, `COLOR`) VALUES
-(1, 'plana', '45'),
-(2, 'plana', 'rosa');
+(2, 'plana', 'rosa'),
+(4, 'adf', 'dfdf'),
+(6, 'rthrh', 'trhrhh');
 
 -- --------------------------------------------------------
 
@@ -487,24 +493,21 @@ INSERT INTO `herramienta` (`ID_HERRAMIENTA`, `TIPO`, `COLOR`) VALUES
 --
 
 DROP TABLE IF EXISTS `inventario`;
-CREATE TABLE `inventario` (
-  `ID_INVENTARIO` int(100) NOT NULL,
+CREATE TABLE IF NOT EXISTS `inventario` (
+  `ID_INVENTARIO` int(100) NOT NULL AUTO_INCREMENT,
   `CANTIDAD` int(100) NOT NULL,
   `FECHA_REGISTRO` date NOT NULL,
   `ESTADO` tinyint(1) NOT NULL,
   `ID_AMBIENTES` int(100) NOT NULL,
   `ID_COMPUTADOR` int(100) NOT NULL,
   `ID_HERRAMIENTA` int(100) NOT NULL,
-  `ID_MATERIAL` int(100) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_general_ci;
-
---
--- Volcado de datos para la tabla `inventario`
---
-
-INSERT INTO `inventario` (`ID_INVENTARIO`, `CANTIDAD`, `FECHA_REGISTRO`, `ESTADO`, `ID_AMBIENTES`, `ID_COMPUTADOR`, `ID_HERRAMIENTA`, `ID_MATERIAL`) VALUES
-(18, 131321, '2023-06-08', 1, 123, 1, 1, 4),
-(19, 0, '0000-00-00', 0, 123, 1, 2, 4);
+  `ID_MATERIAL` int(100) NOT NULL,
+  PRIMARY KEY (`ID_INVENTARIO`),
+  KEY `ID_HERRAMIENTA` (`ID_HERRAMIENTA`),
+  KEY `ID_AMBIENTES` (`ID_AMBIENTES`),
+  KEY `ID_COMPUTADOR` (`ID_COMPUTADOR`),
+  KEY `ID_MATERIAL` (`ID_MATERIAL`)
+) ENGINE=InnoDB AUTO_INCREMENT=20 DEFAULT CHARSET=utf8 COLLATE=utf8_general_ci;
 
 -- --------------------------------------------------------
 
@@ -513,28 +516,29 @@ INSERT INTO `inventario` (`ID_INVENTARIO`, `CANTIDAD`, `FECHA_REGISTRO`, `ESTADO
 --
 
 DROP TABLE IF EXISTS `material`;
-CREATE TABLE `material` (
-  `ID_MATERIAL` int(100) NOT NULL,
+CREATE TABLE IF NOT EXISTS `material` (
+  `ID_MATERIAL` int(100) NOT NULL AUTO_INCREMENT,
   `NOMBRE` varchar(100) NOT NULL,
   `TIPO` varchar(100) DEFAULT NULL,
   `COLOR` varchar(10) DEFAULT NULL,
-  `MEDIDAS` varchar(100) DEFAULT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_general_ci;
+  `MEDIDAS` varchar(100) DEFAULT NULL,
+  PRIMARY KEY (`ID_MATERIAL`)
+) ENGINE=InnoDB AUTO_INCREMENT=24 DEFAULT CHARSET=utf8 COLLATE=utf8_general_ci;
 
 --
 -- Volcado de datos para la tabla `material`
 --
 
 INSERT INTO `material` (`ID_MATERIAL`, `NOMBRE`, `TIPO`, `COLOR`, `MEDIDAS`) VALUES
-(2, 'tela', 'cuero', 'azul', '3 cm'),
 (4, 'tela', 'trasparente', 'azul', '50 cm y 60 cm'),
 (5, 'tela', 'trasparente', 'azul', '1 M'),
 (6, 'tela', 'trasparente', 'azul', '50 cm y 5 cm'),
 (7, 'tela', 'sintentica', 'morado', '200 cm'),
-(12, 'undefined', 'undefined', 'undefined', 'undefined'),
-(13, 'undefined', 'undefined', 'undefined', 'undefined'),
-(14, 'undefined', 'undefined', 'undefined', 'undefined'),
-(15, 'undefined', '12', 'rosa', '2');
+(16, 'caucho', 'latex', 'blanco', 'cm'),
+(17, 'efsfss', 'fsfsfds', 'sfsdfsf', 'sfsfsf'),
+(18, 'sfsfs', 'sfsfsfsfsfs', 'fsfsfsfsfd', 'rgegehth'),
+(22, 'ffffff', 'ffffffffffff', 'ffffffffff', 'ffffffff'),
+(23, 'ttrrtrth', 'thrth', 'rthrh', 'rth');
 
 -- --------------------------------------------------------
 
@@ -543,13 +547,15 @@ INSERT INTO `material` (`ID_MATERIAL`, `NOMBRE`, `TIPO`, `COLOR`, `MEDIDAS`) VAL
 --
 
 DROP TABLE IF EXISTS `prestamos`;
-CREATE TABLE `prestamos` (
-  `ID_PRESTAMOS` int(100) NOT NULL,
+CREATE TABLE IF NOT EXISTS `prestamos` (
+  `ID_PRESTAMOS` int(100) NOT NULL AUTO_INCREMENT,
   `FECHA_PRESTAMO` date NOT NULL,
   `FINAL_PRESTAMO` date NOT NULL,
   `OBSERVACIONES` varchar(100) NOT NULL,
-  `ID_USUARIO` int(100) DEFAULT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_general_ci;
+  `ID_USUARIO` int(100) DEFAULT NULL,
+  PRIMARY KEY (`ID_PRESTAMOS`),
+  KEY `ID_USUARIO` (`ID_USUARIO`)
+) ENGINE=InnoDB AUTO_INCREMENT=11 DEFAULT CHARSET=utf8 COLLATE=utf8_general_ci;
 
 --
 -- Volcado de datos para la tabla `prestamos`
@@ -574,14 +580,16 @@ INSERT INTO `prestamos` (`ID_PRESTAMOS`, `FECHA_PRESTAMO`, `FINAL_PRESTAMO`, `OB
 --
 
 DROP TABLE IF EXISTS `reserva`;
-CREATE TABLE `reserva` (
-  `ID_RESERVA` int(100) NOT NULL,
+CREATE TABLE IF NOT EXISTS `reserva` (
+  `ID_RESERVA` int(100) NOT NULL AUTO_INCREMENT,
   `JORNADA` varchar(20) NOT NULL,
   `FECHA_RES` date NOT NULL,
   `HORA_RES` time NOT NULL,
   `TIEMPO_REQUERIDO` time NOT NULL,
-  `ID_USUARIO` int(100) DEFAULT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_general_ci;
+  `ID_USUARIO` int(100) DEFAULT NULL,
+  PRIMARY KEY (`ID_RESERVA`),
+  KEY `fk__ID_USUARIO` (`ID_USUARIO`)
+) ENGINE=InnoDB AUTO_INCREMENT=16 DEFAULT CHARSET=utf8 COLLATE=utf8_general_ci;
 
 --
 -- Volcado de datos para la tabla `reserva`
@@ -601,16 +609,17 @@ INSERT INTO `reserva` (`ID_RESERVA`, `JORNADA`, `FECHA_RES`, `HORA_RES`, `TIEMPO
 --
 
 DROP TABLE IF EXISTS `res_elem`;
-CREATE TABLE `res_elem` (
-  `ID_RES_ELEM` int(100) NOT NULL,
+CREATE TABLE IF NOT EXISTS `res_elem` (
+  `ID_RES_ELEM` int(100) NOT NULL AUTO_INCREMENT,
   `ID_RESERVA` int(100) NOT NULL,
   `ID_INVENTARIO` int(100) NOT NULL,
   `NOMBRE_INSUMO` varchar(100) NOT NULL,
   `CARACTERISTICAS` varchar(100) NOT NULL,
   `TIPO_INSUMO` varchar(100) NOT NULL,
   `CANTIDAD` int(100) NOT NULL,
-  `ESTADO_APROBACION` int(1) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_general_ci;
+  `ESTADO_APROBACION` int(1) NOT NULL,
+  PRIMARY KEY (`ID_RES_ELEM`)
+) ENGINE=InnoDB AUTO_INCREMENT=17 DEFAULT CHARSET=utf8 COLLATE=utf8_general_ci;
 
 -- --------------------------------------------------------
 
@@ -619,11 +628,12 @@ CREATE TABLE `res_elem` (
 --
 
 DROP TABLE IF EXISTS `rol`;
-CREATE TABLE `rol` (
-  `ID_ROL` int(100) NOT NULL,
+CREATE TABLE IF NOT EXISTS `rol` (
+  `ID_ROL` int(100) NOT NULL AUTO_INCREMENT,
   `NOMBRE_ROL` varchar(100) NOT NULL,
-  `ESTADO` tinyint(1) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_general_ci;
+  `ESTADO` tinyint(1) NOT NULL,
+  PRIMARY KEY (`ID_ROL`)
+) ENGINE=InnoDB AUTO_INCREMENT=5 DEFAULT CHARSET=utf8 COLLATE=utf8_general_ci;
 
 --
 -- Volcado de datos para la tabla `rol`
@@ -642,7 +652,7 @@ INSERT INTO `rol` (`ID_ROL`, `NOMBRE_ROL`, `ESTADO`) VALUES
 --
 
 DROP TABLE IF EXISTS `usuario`;
-CREATE TABLE `usuario` (
+CREATE TABLE IF NOT EXISTS `usuario` (
   `ID_USUARIO` int(100) NOT NULL,
   `NOMBRE` varchar(30) DEFAULT NULL,
   `APELLIDO` varchar(30) DEFAULT NULL,
@@ -655,7 +665,9 @@ CREATE TABLE `usuario` (
   `NUM_FICHA` int(15) DEFAULT NULL,
   `GENERO` varchar(10) DEFAULT NULL,
   `CONTRASENA` varchar(100) NOT NULL,
-  `ID_ROL` int(100) DEFAULT NULL
+  `ID_ROL` int(100) DEFAULT NULL,
+  PRIMARY KEY (`ID_USUARIO`),
+  KEY `ID_ROL` (`ID_ROL`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_general_ci;
 
 --
@@ -668,143 +680,6 @@ INSERT INTO `usuario` (`ID_USUARIO`, `NOMBRE`, `APELLIDO`, `TIPO_DOCUMENTO`, `CO
 (3, 'santiago', 'fd', 'cc', 'mzcsdkesdk@gmial.com', '2344444', 'cra 43-56-90', 'tarde', 'ADSI', 23455, 'masculino', '3232321', 2),
 (1018226843, 'sebas', 'jaramillo', 'c.', 'danij@gmail.com', '3147536733', 'calle 142 sur', 'diurna', 'adsi', 2472762, 'femenino', '1357', 2),
 (1040571170, 'camila', 'grajales', 'cc', 'mcgrajalesv@gmail.com', '3128611996', 'cra 43-56-90', 'tarde', 'adsi', 2472762, 'femenino', '123', 3);
-
---
--- Índices para tablas volcadas
---
-
---
--- Indices de la tabla `ambientes`
---
-ALTER TABLE `ambientes`
-  ADD PRIMARY KEY (`ID_AMBIENTES`);
-
---
--- Indices de la tabla `computador`
---
-ALTER TABLE `computador`
-  ADD PRIMARY KEY (`ID_COMPUTADOR`);
-
---
--- Indices de la tabla `elementos`
---
-ALTER TABLE `elementos`
-  ADD PRIMARY KEY (`ID_ELEMENTOS`),
-  ADD KEY `ID_PRESTAMOS` (`ID_PRESTAMOS`),
-  ADD KEY `ID_INVENTARIO` (`ID_INVENTARIO`);
-
---
--- Indices de la tabla `herramienta`
---
-ALTER TABLE `herramienta`
-  ADD PRIMARY KEY (`ID_HERRAMIENTA`);
-
---
--- Indices de la tabla `inventario`
---
-ALTER TABLE `inventario`
-  ADD PRIMARY KEY (`ID_INVENTARIO`),
-  ADD KEY `ID_HERRAMIENTA` (`ID_HERRAMIENTA`),
-  ADD KEY `ID_AMBIENTES` (`ID_AMBIENTES`),
-  ADD KEY `ID_COMPUTADOR` (`ID_COMPUTADOR`),
-  ADD KEY `ID_MATERIAL` (`ID_MATERIAL`);
-
---
--- Indices de la tabla `material`
---
-ALTER TABLE `material`
-  ADD PRIMARY KEY (`ID_MATERIAL`);
-
---
--- Indices de la tabla `prestamos`
---
-ALTER TABLE `prestamos`
-  ADD PRIMARY KEY (`ID_PRESTAMOS`),
-  ADD KEY `ID_USUARIO` (`ID_USUARIO`);
-
---
--- Indices de la tabla `reserva`
---
-ALTER TABLE `reserva`
-  ADD PRIMARY KEY (`ID_RESERVA`),
-  ADD KEY `fk__ID_USUARIO` (`ID_USUARIO`);
-
---
--- Indices de la tabla `res_elem`
---
-ALTER TABLE `res_elem`
-  ADD PRIMARY KEY (`ID_RES_ELEM`);
-
---
--- Indices de la tabla `rol`
---
-ALTER TABLE `rol`
-  ADD PRIMARY KEY (`ID_ROL`);
-
---
--- Indices de la tabla `usuario`
---
-ALTER TABLE `usuario`
-  ADD PRIMARY KEY (`ID_USUARIO`),
-  ADD KEY `ID_ROL` (`ID_ROL`);
-
---
--- AUTO_INCREMENT de las tablas volcadas
---
-
---
--- AUTO_INCREMENT de la tabla `computador`
---
-ALTER TABLE `computador`
-  MODIFY `ID_COMPUTADOR` int(100) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
-
---
--- AUTO_INCREMENT de la tabla `elementos`
---
-ALTER TABLE `elementos`
-  MODIFY `ID_ELEMENTOS` int(100) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
-
---
--- AUTO_INCREMENT de la tabla `herramienta`
---
-ALTER TABLE `herramienta`
-  MODIFY `ID_HERRAMIENTA` int(100) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
-
---
--- AUTO_INCREMENT de la tabla `inventario`
---
-ALTER TABLE `inventario`
-  MODIFY `ID_INVENTARIO` int(100) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=20;
-
---
--- AUTO_INCREMENT de la tabla `material`
---
-ALTER TABLE `material`
-  MODIFY `ID_MATERIAL` int(100) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=16;
-
---
--- AUTO_INCREMENT de la tabla `prestamos`
---
-ALTER TABLE `prestamos`
-  MODIFY `ID_PRESTAMOS` int(100) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=11;
-
---
--- AUTO_INCREMENT de la tabla `reserva`
---
-ALTER TABLE `reserva`
-  MODIFY `ID_RESERVA` int(100) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=16;
-
---
--- AUTO_INCREMENT de la tabla `res_elem`
---
-ALTER TABLE `res_elem`
-  MODIFY `ID_RES_ELEM` int(100) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=17;
-
---
--- AUTO_INCREMENT de la tabla `rol`
---
-ALTER TABLE `rol`
-  MODIFY `ID_ROL` int(100) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
 
 --
 -- Restricciones para tablas volcadas
