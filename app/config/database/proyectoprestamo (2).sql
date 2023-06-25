@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Servidor: 127.0.0.1
--- Tiempo de generación: 24-06-2023 a las 12:14:29
+-- Tiempo de generación: 25-06-2023 a las 10:16:30
 -- Versión del servidor: 10.4.28-MariaDB
 -- Versión de PHP: 8.0.28
 
@@ -287,15 +287,15 @@ CREATE DEFINER=`root`@`localhost` PROCEDURE `spInsertPrestamos` (IN `_FECHA_PRES
 END$$
 
 DROP PROCEDURE IF EXISTS `spInsertResElem`$$
-CREATE DEFINER=`root`@`localhost` PROCEDURE `spInsertResElem` (IN `_ID_RESERVA` INT, IN `_ID_INVENTARIO` INT, IN `_ESTADO_APROBACION` BOOLEAN)   BEGIN
-    INSERT INTO res_elem (ID_RESERVA, ID_INVENTARIO, ESTADO_APROBACION)
-    VALUES ( _ID_RESERVA, _ID_INVENTARIO,_ESTADO_APROBACION);
+CREATE DEFINER=`root`@`localhost` PROCEDURE `spInsertResElem` (IN `_NOMBRE_INSUMO` VARCHAR(100), IN `_TIPO_INSUMO` VARCHAR(100), IN `_CARACTERISTICAS` VARCHAR(100), IN `_CANTIDAD` INT(100), IN `_ESTADO_APROBACION` BOOLEAN)   BEGIN
+    INSERT INTO res_elem ( NOMBRE_INSUMO, TIPO_INSUMO, CARACTERISTICAS, CANTIDAD , ESTADO_APROBACION)
+    VALUES ( _NOMBRE_INSUMO, _TIPO_INSUMO, _CARACTERISTICAS, _CANTIDAD, _ESTADO_APROBACION);
 END$$
 
 DROP PROCEDURE IF EXISTS `spInsertReserva`$$
-CREATE DEFINER=`root`@`localhost` PROCEDURE `spInsertReserva` (IN `_FECHA_RES` DATE, IN `_HORA_RES` TIME, IN `_TIEMPO_REQUERIDO` TIME, IN `_ID_USUARIO` INT)   BEGIN
-    INSERT INTO reserva (FECHA_RES, HORA_RES, TIEMPO_REQUERIDO, ID_USUARIO)
-    VALUES (_FECHA_RES, _HORA_RES, _TIEMPO_REQUERIDO, _ID_USUARIO);
+CREATE DEFINER=`root`@`localhost` PROCEDURE `spInsertReserva` (IN `_JORNADA` VARCHAR(20), IN `_FECHA_RES` DATE, IN `_HORA_RES` TIME, IN `_TIEMPO_REQUERIDO` TIME, IN `_ID_USUARIO` INT)   BEGIN
+    INSERT INTO reserva (JORNADA, FECHA_RES, HORA_RES, TIEMPO_REQUERIDO, ID_USUARIO)
+    VALUES ( _JORNADA, _FECHA_RES, _HORA_RES, _TIEMPO_REQUERIDO, _ID_USUARIO);
 END$$
 
 DROP PROCEDURE IF EXISTS `spInsertRol`$$
@@ -305,9 +305,9 @@ CREATE DEFINER=`root`@`localhost` PROCEDURE `spInsertRol` (IN `_ID_ROL` INT, IN 
 END$$
 
 DROP PROCEDURE IF EXISTS `spInsertUsuario`$$
-CREATE DEFINER=`root`@`localhost` PROCEDURE `spInsertUsuario` (IN `_NOMBRE` VARCHAR(30), IN `_APELLIDO` VARCHAR(30), IN `_TIPO_DOCUMENTO` VARCHAR(3), IN `_CORREO` VARCHAR(30), IN `_TELEFONO` VARCHAR(12), IN `_DIRECCION` VARCHAR(30), IN `_JORNADA` VARCHAR(30), IN `_PROGRAMA_FORMACION` VARCHAR(100), IN `_NUM_FICHA` INT, IN `_GENERO` VARCHAR(10), IN `_CONTRASENA` VARCHAR(100), IN `_ID_ROL` INT)   BEGIN
-    INSERT INTO usuario (NOMBRE, APELLIDO, TIPO_DOCUMENTO,CORREO, TELEFONO, DIRECCION, JORNADA, PROGRAMA_FORMACION, NUM_FICHA, GENERO, CONTRASENA, ID_ROL)
-    VALUES ( _NOMBRE, _APELLIDO, _TIPO_DOCUMENTO, _CORREO, _TELEFONO, _DIRECCION, _JORNADA, _PROGRAMA_FORMACION, _NUM_FICHA, _GENERO, _CONTRASENA, _ID_ROL);
+CREATE DEFINER=`root`@`localhost` PROCEDURE `spInsertUsuario` (IN `_ID_USUARIO` INT(100), IN `_NOMBRE` VARCHAR(30), IN `_APELLIDO` VARCHAR(30), IN `_TIPO_DOCUMENTO` VARCHAR(3), IN `_CORREO` VARCHAR(30), IN `_TELEFONO` VARCHAR(12), IN `_DIRECCION` VARCHAR(30), IN `_JORNADA` VARCHAR(30), IN `_PROGRAMA_FORMACION` VARCHAR(100), IN `_NUM_FICHA` INT, IN `_GENERO` VARCHAR(10), IN `_CONTRASENA` VARCHAR(100), IN `_ID_ROL` INT)   BEGIN
+    INSERT INTO usuario (ID_USUARIO, NOMBRE, APELLIDO, TIPO_DOCUMENTO,CORREO, TELEFONO, DIRECCION, JORNADA, PROGRAMA_FORMACION, NUM_FICHA, GENERO, CONTRASENA, ID_ROL)
+    VALUES (_ID_USUARIO, _NOMBRE, _APELLIDO, _TIPO_DOCUMENTO, _CORREO, _TELEFONO, _DIRECCION, _JORNADA, _PROGRAMA_FORMACION, _NUM_FICHA, _GENERO, _CONTRASENA, _ID_ROL);
 END$$
 
 DROP PROCEDURE IF EXISTS `spUpdateAmbientes`$$
@@ -360,16 +360,17 @@ CREATE DEFINER=`root`@`localhost` PROCEDURE `spUpdatePrestamos` (IN `_ID_PRESTAM
 END$$
 
 DROP PROCEDURE IF EXISTS `spUpdateResElem`$$
-CREATE DEFINER=`root`@`localhost` PROCEDURE `spUpdateResElem` (IN `_ID_RES_ELEM` INT, IN `_ID_RESERVA` INT, IN `_ID_INVENTARIO` INT, IN `ESTADO_APROBACION` BOOLEAN)   BEGIN
+CREATE DEFINER=`root`@`localhost` PROCEDURE `spUpdateResElem` (IN `ID_RES_ELEM` INT(100), IN `_NOMBRE_INSUMO` VARCHAR(100), IN `_TIPO_INSUMO` VARCHAR(100), IN `_CARACTERISTICAS` VARCHAR(100), IN `_CANTIDAD` INT(100), IN `ESTADO_APROBACION` BOOLEAN)   BEGIN
     UPDATE res_elem
-    SET ID_RESERVA = _ID_RESERVA, ID_INVENTARIO = _ID_INVENTARIO, ESTADO_APROBACION = _ESTADO_APROBACION
+    SET  NOMBRE_INSUMO= _NOMBRE_INSUMO, TIPO_INSUMO = _TIPO_INSUMO 
+,CARACTERISTICAS = _CARACTERISTICAS, CANTIDAD = _CANTIDAD, ESTADO_APROBACION = _ESTADO_APROBACION
     WHERE ID_RES_ELEM = _ID_RES_ELEM;
 END$$
 
 DROP PROCEDURE IF EXISTS `spUpdateReserva`$$
-CREATE DEFINER=`root`@`localhost` PROCEDURE `spUpdateReserva` (IN `_ID_RESERVA` INT, IN `_FECHA_RES` DATE, IN `_HORA_RES` TIME, IN `_TIEMPO_REQUERIDO` TIME, IN `_ID_USUARIO` INT)   BEGIN
+CREATE DEFINER=`root`@`localhost` PROCEDURE `spUpdateReserva` (IN `_ID_RESERVA` INT, IN `_JORNADA` INT, IN `_FECHA_RES` DATE, IN `_HORA_RES` TIME, IN `_TIEMPO_REQUERIDO` TIME, IN `_ID_USUARIO` INT)   BEGIN
     UPDATE reserva
-    SET FECHA_RES = _FECHA_RES, HORA_RES = _HORA_RES, TIEMPO_REQUERIDO = _TIEMPO_REQUERIDO, ID_USUARIO = _ID_USUARIO
+    SET  JORNADA = _JORNADA, FECHA_RES = _FECHA_RES, HORA_RES = _HORA_RES, TIEMPO_REQUERIDO = _TIEMPO_REQUERIDO, ID_USUARIO = _ID_USUARIO
     WHERE ID_RESERVA = _ID_RESERVA;
 END$$
 
@@ -454,17 +455,9 @@ INSERT INTO `computador` (`ID_COMPUTADOR`, `MARCA`, `CARGADOR`, `MOUSE`) VALUES
 DROP TABLE IF EXISTS `elementos`;
 CREATE TABLE `elementos` (
   `ID_ELEMENTOS` int(100) NOT NULL,
-  `ID_PRESTAMOS` int(100) NOT NULL,
-  `ID_INVENTARIO` int(100) NOT NULL
+  `ID_PRESTAMOS` int(100) DEFAULT NULL,
+  `ID_INVENTARIO` int(100) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_general_ci;
-
---
--- Volcado de datos para la tabla `elementos`
---
-
-INSERT INTO `elementos` (`ID_ELEMENTOS`, `ID_PRESTAMOS`, `ID_INVENTARIO`) VALUES
-(2, 1, 2),
-(5, 6, 3);
 
 -- --------------------------------------------------------
 
@@ -499,23 +492,19 @@ CREATE TABLE `inventario` (
   `CANTIDAD` int(100) NOT NULL,
   `FECHA_REGISTRO` date NOT NULL,
   `ESTADO` tinyint(1) NOT NULL,
-  `ID_COMPUTADOR` int(100) DEFAULT NULL,
-  `ID_HERRAMIENTA` int(100) DEFAULT NULL,
-  `ID_AMBIENTES` int(100) DEFAULT NULL,
-  `ID_MATERIAL` int(100) DEFAULT NULL
+  `ID_AMBIENTES` int(100) NOT NULL,
+  `ID_COMPUTADOR` int(100) NOT NULL,
+  `ID_HERRAMIENTA` int(100) NOT NULL,
+  `ID_MATERIAL` int(100) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_general_ci;
 
 --
 -- Volcado de datos para la tabla `inventario`
 --
 
-INSERT INTO `inventario` (`ID_INVENTARIO`, `CANTIDAD`, `FECHA_REGISTRO`, `ESTADO`, `ID_COMPUTADOR`, `ID_HERRAMIENTA`, `ID_AMBIENTES`, `ID_MATERIAL`) VALUES
-(2, 2, '2023-03-01', 0, 1, 1, 1, 2),
-(5, 10, '0000-00-00', 0, 4, 2, 3, 5),
-(10, 2, '0000-00-00', 0, 3, 3, 5, 3),
-(12, 2, '0000-00-00', 0, 0, 4, 4, 0),
-(14, 90, '0000-00-00', 0, 7, 10, 11, 4),
-(17, 96, '0000-00-00', 0, 9, 8, 9, 6);
+INSERT INTO `inventario` (`ID_INVENTARIO`, `CANTIDAD`, `FECHA_REGISTRO`, `ESTADO`, `ID_AMBIENTES`, `ID_COMPUTADOR`, `ID_HERRAMIENTA`, `ID_MATERIAL`) VALUES
+(18, 131321, '2023-06-08', 1, 123, 1, 1, 4),
+(19, 0, '0000-00-00', 0, 123, 1, 2, 4);
 
 -- --------------------------------------------------------
 
@@ -559,7 +548,7 @@ CREATE TABLE `prestamos` (
   `FECHA_PRESTAMO` date NOT NULL,
   `FINAL_PRESTAMO` date NOT NULL,
   `OBSERVACIONES` varchar(100) NOT NULL,
-  `ID_USUARIO` int(100) NOT NULL
+  `ID_USUARIO` int(100) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_general_ci;
 
 --
@@ -567,16 +556,16 @@ CREATE TABLE `prestamos` (
 --
 
 INSERT INTO `prestamos` (`ID_PRESTAMOS`, `FECHA_PRESTAMO`, `FINAL_PRESTAMO`, `OBSERVACIONES`, `ID_USUARIO`) VALUES
-(1, '2023-06-01', '2023-06-05', 'Préstamo de libros', 100),
-(2, '2023-06-02', '2023-06-04', 'Préstamo de equipo audiovisual', 101),
-(3, '2023-06-03', '2023-06-07', 'Préstamo de computadora portátil', 102),
-(4, '2023-06-04', '2023-06-06', 'Préstamo de proyector', 103),
-(5, '2023-06-05', '2023-06-08', 'Préstamo de herramientas', 104),
-(6, '2023-06-06', '2023-06-09', 'Préstamo de instrumentos musicales', 105),
-(7, '2023-06-07', '2023-06-10', 'Préstamo de material de laboratorio', 106),
-(8, '2023-06-08', '2023-06-11', 'Préstamo de bicicletas', 107),
-(9, '2023-06-09', '2023-06-12', 'Préstamo de cámaras fotográficas', 108),
-(10, '2023-06-10', '2023-06-13', 'Préstamo de juegos de mesa', 109);
+(1, '2023-06-01', '2023-06-05', 'Préstamo de libros', NULL),
+(2, '2023-06-02', '2023-06-04', 'Préstamo de equipo audiovisual', NULL),
+(3, '2023-06-03', '2023-06-07', 'Préstamo de computadora portátil', NULL),
+(4, '2023-06-04', '2023-06-06', 'Préstamo de proyector', NULL),
+(5, '2023-06-05', '2023-06-08', 'Préstamo de herramientas', NULL),
+(6, '2023-06-06', '2023-06-09', 'Préstamo de instrumentos musicales', NULL),
+(7, '2023-06-07', '2023-06-10', 'Préstamo de material de laboratorio', NULL),
+(8, '2023-06-08', '2023-06-11', 'Préstamo de bicicletas', NULL),
+(9, '2023-06-09', '2023-06-12', 'Préstamo de cámaras fotográficas', NULL),
+(10, '2023-06-10', '2023-06-13', 'Préstamo de juegos de mesa', NULL);
 
 -- --------------------------------------------------------
 
@@ -587,23 +576,23 @@ INSERT INTO `prestamos` (`ID_PRESTAMOS`, `FECHA_PRESTAMO`, `FINAL_PRESTAMO`, `OB
 DROP TABLE IF EXISTS `reserva`;
 CREATE TABLE `reserva` (
   `ID_RESERVA` int(100) NOT NULL,
-  `NOMBRE_INSUMO` varchar(100) NOT NULL,
-  `TIPO_INSUMO` varchar(100) NOT NULL,
-  `CARACTERISTICAS` varchar(100) NOT NULL,
-  `CANTIDAD` int(100) NOT NULL,
+  `JORNADA` varchar(20) NOT NULL,
   `FECHA_RES` date NOT NULL,
   `HORA_RES` time NOT NULL,
   `TIEMPO_REQUERIDO` time NOT NULL,
-  `ID_USUARIO` int(100) NOT NULL
+  `ID_USUARIO` int(100) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_general_ci;
 
 --
 -- Volcado de datos para la tabla `reserva`
 --
 
-INSERT INTO `reserva` (`ID_RESERVA`, `NOMBRE_INSUMO`, `TIPO_INSUMO`, `CARACTERISTICAS`, `CANTIDAD`, `FECHA_RES`, `HORA_RES`, `TIEMPO_REQUERIDO`, `ID_USUARIO`) VALUES
-(2, '', '', '', 0, '2023-06-14', '12:18:46', '02:00:46', 1),
-(3, '', '', '', 0, '2023-05-14', '12:18:46', '02:00:46', 2);
+INSERT INTO `reserva` (`ID_RESERVA`, `JORNADA`, `FECHA_RES`, `HORA_RES`, `TIEMPO_REQUERIDO`, `ID_USUARIO`) VALUES
+(2, '', '2023-06-14', '12:18:46', '02:00:46', NULL),
+(3, '', '2023-05-14', '12:18:46', '02:00:46', NULL),
+(5, 'diurna', '0000-00-00', '20:14:00', '00:00:02', NULL),
+(10, 'diurna', '0000-00-00', '20:14:00', '00:00:02', 2),
+(15, 'diurna', '0000-00-00', '20:14:00', '00:00:02', 2);
 
 -- --------------------------------------------------------
 
@@ -616,17 +605,12 @@ CREATE TABLE `res_elem` (
   `ID_RES_ELEM` int(100) NOT NULL,
   `ID_RESERVA` int(100) NOT NULL,
   `ID_INVENTARIO` int(100) NOT NULL,
+  `NOMBRE_INSUMO` varchar(100) NOT NULL,
+  `CARACTERISTICAS` varchar(100) NOT NULL,
+  `TIPO_INSUMO` varchar(100) NOT NULL,
+  `CANTIDAD` int(100) NOT NULL,
   `ESTADO_APROBACION` int(1) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_general_ci;
-
---
--- Volcado de datos para la tabla `res_elem`
---
-
-INSERT INTO `res_elem` (`ID_RES_ELEM`, `ID_RESERVA`, `ID_INVENTARIO`, `ESTADO_APROBACION`) VALUES
-(1, 5, 6, 0),
-(4, 99, 4, 0),
-(7, 2, 3, 0);
 
 -- --------------------------------------------------------
 
@@ -682,6 +666,7 @@ INSERT INTO `usuario` (`ID_USUARIO`, `NOMBRE`, `APELLIDO`, `TIPO_DOCUMENTO`, `CO
 (1, 'daniela', 'jaramillo', 'c.', 'danij@gmail.com', '3147536733', 'calle 142 sur', 'diurna', 'adsi', 2472762, 'femenino', '1234', 1),
 (2, 'csa', 'cami', 'cc', 'mzcsdkesdk@gmial.com', '2344444', 'cra 43-56-90', 'tarde', 'ADSI', 234355, 'masculino', '3232321', 4),
 (3, 'santiago', 'fd', 'cc', 'mzcsdkesdk@gmial.com', '2344444', 'cra 43-56-90', 'tarde', 'ADSI', 23455, 'masculino', '3232321', 2),
+(1018226843, 'sebas', 'jaramillo', 'c.', 'danij@gmail.com', '3147536733', 'calle 142 sur', 'diurna', 'adsi', 2472762, 'femenino', '1357', 2),
 (1040571170, 'camila', 'grajales', 'cc', 'mcgrajalesv@gmail.com', '3128611996', 'cra 43-56-90', 'tarde', 'adsi', 2472762, 'femenino', '123', 3);
 
 --
@@ -705,8 +690,8 @@ ALTER TABLE `computador`
 --
 ALTER TABLE `elementos`
   ADD PRIMARY KEY (`ID_ELEMENTOS`),
-  ADD UNIQUE KEY `ID_INVENTARIO` (`ID_INVENTARIO`),
-  ADD UNIQUE KEY `ID_PRESTAMOS` (`ID_PRESTAMOS`);
+  ADD KEY `ID_PRESTAMOS` (`ID_PRESTAMOS`),
+  ADD KEY `ID_INVENTARIO` (`ID_INVENTARIO`);
 
 --
 -- Indices de la tabla `herramienta`
@@ -719,10 +704,10 @@ ALTER TABLE `herramienta`
 --
 ALTER TABLE `inventario`
   ADD PRIMARY KEY (`ID_INVENTARIO`),
-  ADD UNIQUE KEY `ID_COMPUTADOR` (`ID_COMPUTADOR`),
-  ADD UNIQUE KEY `ID_HERRAMIENTA` (`ID_HERRAMIENTA`),
-  ADD UNIQUE KEY `ID_AMBIENTES` (`ID_AMBIENTES`),
-  ADD UNIQUE KEY `ID_MATERIAL` (`ID_MATERIAL`);
+  ADD KEY `ID_HERRAMIENTA` (`ID_HERRAMIENTA`),
+  ADD KEY `ID_AMBIENTES` (`ID_AMBIENTES`),
+  ADD KEY `ID_COMPUTADOR` (`ID_COMPUTADOR`),
+  ADD KEY `ID_MATERIAL` (`ID_MATERIAL`);
 
 --
 -- Indices de la tabla `material`
@@ -735,22 +720,20 @@ ALTER TABLE `material`
 --
 ALTER TABLE `prestamos`
   ADD PRIMARY KEY (`ID_PRESTAMOS`),
-  ADD UNIQUE KEY `ID_USUARIO` (`ID_USUARIO`);
+  ADD KEY `ID_USUARIO` (`ID_USUARIO`);
 
 --
 -- Indices de la tabla `reserva`
 --
 ALTER TABLE `reserva`
   ADD PRIMARY KEY (`ID_RESERVA`),
-  ADD UNIQUE KEY `ID_USUARIO` (`ID_USUARIO`);
+  ADD KEY `fk__ID_USUARIO` (`ID_USUARIO`);
 
 --
 -- Indices de la tabla `res_elem`
 --
 ALTER TABLE `res_elem`
-  ADD PRIMARY KEY (`ID_RES_ELEM`),
-  ADD KEY `ID_RESERVA` (`ID_RESERVA`) USING BTREE,
-  ADD KEY `ID_INVENTARIO` (`ID_INVENTARIO`) USING BTREE;
+  ADD PRIMARY KEY (`ID_RES_ELEM`);
 
 --
 -- Indices de la tabla `rol`
@@ -763,7 +746,7 @@ ALTER TABLE `rol`
 --
 ALTER TABLE `usuario`
   ADD PRIMARY KEY (`ID_USUARIO`),
-  ADD KEY `ID_ROL` (`ID_ROL`) USING BTREE;
+  ADD KEY `ID_ROL` (`ID_ROL`);
 
 --
 -- AUTO_INCREMENT de las tablas volcadas
@@ -791,7 +774,7 @@ ALTER TABLE `herramienta`
 -- AUTO_INCREMENT de la tabla `inventario`
 --
 ALTER TABLE `inventario`
-  MODIFY `ID_INVENTARIO` int(100) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=18;
+  MODIFY `ID_INVENTARIO` int(100) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=20;
 
 --
 -- AUTO_INCREMENT de la tabla `material`
@@ -809,19 +792,58 @@ ALTER TABLE `prestamos`
 -- AUTO_INCREMENT de la tabla `reserva`
 --
 ALTER TABLE `reserva`
-  MODIFY `ID_RESERVA` int(100) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
+  MODIFY `ID_RESERVA` int(100) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=16;
 
 --
 -- AUTO_INCREMENT de la tabla `res_elem`
 --
 ALTER TABLE `res_elem`
-  MODIFY `ID_RES_ELEM` int(100) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=8;
+  MODIFY `ID_RES_ELEM` int(100) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=17;
 
 --
 -- AUTO_INCREMENT de la tabla `rol`
 --
 ALTER TABLE `rol`
   MODIFY `ID_ROL` int(100) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
+
+--
+-- Restricciones para tablas volcadas
+--
+
+--
+-- Filtros para la tabla `elementos`
+--
+ALTER TABLE `elementos`
+  ADD CONSTRAINT `ID_INVENTARIO` FOREIGN KEY (`ID_INVENTARIO`) REFERENCES `inventario` (`ID_INVENTARIO`),
+  ADD CONSTRAINT `ID_PRESTAMOS` FOREIGN KEY (`ID_PRESTAMOS`) REFERENCES `prestamos` (`ID_PRESTAMOS`);
+
+--
+-- Filtros para la tabla `inventario`
+--
+ALTER TABLE `inventario`
+  ADD CONSTRAINT `ID_AMBIENTES` FOREIGN KEY (`ID_AMBIENTES`) REFERENCES `ambientes` (`ID_AMBIENTES`),
+  ADD CONSTRAINT `ID_COMPUTADOR` FOREIGN KEY (`ID_COMPUTADOR`) REFERENCES `computador` (`ID_COMPUTADOR`),
+  ADD CONSTRAINT `ID_HERRAMIENTA` FOREIGN KEY (`ID_HERRAMIENTA`) REFERENCES `herramienta` (`ID_HERRAMIENTA`),
+  ADD CONSTRAINT `ID_MATERIAL` FOREIGN KEY (`ID_MATERIAL`) REFERENCES `material` (`ID_MATERIAL`);
+
+--
+-- Filtros para la tabla `prestamos`
+--
+ALTER TABLE `prestamos`
+  ADD CONSTRAINT `ID_USUARIO` FOREIGN KEY (`ID_USUARIO`) REFERENCES `usuario` (`ID_USUARIO`);
+
+--
+-- Filtros para la tabla `reserva`
+--
+ALTER TABLE `reserva`
+  ADD CONSTRAINT `fk_ID_USUARIO` FOREIGN KEY (`ID_USUARIO`) REFERENCES `usuario` (`ID_USUARIO`),
+  ADD CONSTRAINT `fk__ID_USUARIO` FOREIGN KEY (`ID_USUARIO`) REFERENCES `usuario` (`ID_USUARIO`);
+
+--
+-- Filtros para la tabla `usuario`
+--
+ALTER TABLE `usuario`
+  ADD CONSTRAINT `ID_ROL` FOREIGN KEY (`ID_ROL`) REFERENCES `rol` (`ID_ROL`);
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
