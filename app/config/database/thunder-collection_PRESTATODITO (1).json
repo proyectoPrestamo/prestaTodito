@@ -1,7 +1,7 @@
 {
     "client": "Thunder Client",
     "collectionName": "PRESTATODITO",
-    "dateExported": "2023-06-25T08:17:29.034Z",
+    "dateExported": "2023-06-25T05:16:50.940Z",
     "version": "1.1",
     "folders": [
         {
@@ -604,12 +604,12 @@
             "method": "POST",
             "sortNum": 30000,
             "created": "2023-06-24T23:21:37.247Z",
-            "modified": "2023-06-25T07:49:52.623Z",
+            "modified": "2023-06-24T23:21:37.247Z",
             "headers": [],
             "params": [],
             "body": {
                 "type": "json",
-                "raw": "{\n   \"nombre_insumo\" : \"cuerda\", \n    \"tipo_insumo\" : \"cuero\",\n    \"caracteristicas\" : \"metro\", \n   \"cantidad\" : \"124\",\n  \"estado_aprobacion\": 1\n\n}",
+                "raw": "{\n  \n  \"id_reserva\": 5,\n  \"id_inventario\": 4,\n  \"estado_aprobacion\": 1\n\n}",
                 "form": []
             },
             "tests": []
@@ -623,12 +623,12 @@
             "method": "POST",
             "sortNum": 30000,
             "created": "2023-06-24T23:21:37.248Z",
-            "modified": "2023-06-25T07:13:03.815Z",
+            "modified": "2023-06-25T05:04:44.464Z",
             "headers": [],
             "params": [],
             "body": {
                 "type": "json",
-                "raw": "{ \n    \n     \"jornada\" : \"diurna\",\n     \"fecha_res\" : \"24/06/2023\",\n     \"hora_res\" : \"20:14:00\",\n     \"tiempo_requerido\" : \"2\", \n     \"id_usuario\" : \"2\"\n      \n}",
+                "raw": "{ \n     \"nombre_insumo\" : \"cuerda\", \n    \"tipo_insumo\" : \"cuero\",\n    \"caracteristicas\" : \"metro\", \n   \"cantidad\" : \"124\",\n     \"jornada\" : \"diurna\",\n     \"fecha_res\" : \"24/06/2023\",\n     \"hora_res\" : \"20:14:00\",\n     \"tiempo_requerido\" : \"2\", \n     \"id_usuario\" : \"2\"\n      \n}",
                 "form": []
             },
             "tests": []
