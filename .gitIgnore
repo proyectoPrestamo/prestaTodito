@@ -1,2 +1,6 @@
 app/
+app
+app/config/database/prompt.txt
+config
+enviroments
 node_modules
