@@ -1,13 +1,15 @@
 import { pool } from "../config/database/db";
 
 
-export const findUser = async(req, res) => {
-    const id = req.params.id;
-    try {
-    const[rows] = await pool.query(`CALL spFindUser(${id});`);
-       res.json(rows);
-    } catch (error) {
-       console.error("Ha ocurrido un error");
-       
-    }
- };
+export const consultUser = async(req, res) => {
+   const id_usuario = req.body.id_usuario;
+   const contrasena = req.body.contrasena;
+
+   try {
+      const result = await pool.query(`CALL spConsultarUsuario(${id_usuario},'${contrasena}');`);
+      res.json(result);
+   } catch (error) {
+      console.error("Ha ocurrido un error" + error);
+   }
+
+};

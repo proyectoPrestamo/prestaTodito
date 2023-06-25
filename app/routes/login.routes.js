@@ -1,8 +1,8 @@
 import { Router } from "express"; 
 
 import * as controller from "../controllers/login.controller.js"
-const route = Router();
+const login = Router();
 
-route.get("/usuario/:id",controller.findUser);
+login.post("/consulta",controller.consultUser);
 
-export default route;
+export default login;

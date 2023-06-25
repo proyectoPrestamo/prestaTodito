@@ -11,7 +11,7 @@ export const findAllUsuario= async (req, res) => {
       const [rows] = await pool.query("CALL spFindAllUsuario();");
       res.json(rows);
    } catch (error) {
-      console.error("Ha ocurrido un error");
+      console.error("Ha ocurrido un errorcito" + error);
 
    }
 };
@@ -22,7 +22,7 @@ export const findUsuario= async (req, res) => {
       const [rows] = await pool.query(`CALL spFindUsuario(${id});`);
       res.json(rows);
    } catch (error) {
-      console.error("Ha ocurrido un error");
+      console.error("Ha ocurrido un error" + error);
 
    }
 };

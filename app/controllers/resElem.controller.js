@@ -26,9 +26,10 @@ export const findAllResElem = async (req, res) => {
  export const insertResElem = async (req, res) => {
     const id_reserva = req.body.id_reserva;
     const id_inventario = req.body.id_inventario;
+    const estado_aprobacion = req.body.estado_aprobacion;
 
     try {
-       const result = await pool.query(`CALL spInsertResElem('${id_reserva}','${id_inventario}');`);
+       const result = await pool.query(`CALL spInsertResElem('${id_reserva}','${id_inventario}','${estado_aprobacion}');`);
        res.json(result);
     } catch (error) {
        console.error("Ha ocurrido un error" + error);
@@ -54,10 +55,11 @@ export const findAllResElem = async (req, res) => {
     const id = req.params.id;
     const id_reserva = req.body.id_reserva;
     const id_inventario = req.body.id_inventario;
+    const estado_aprobacion = req.body.estado_aprobacion;
    
  
     try {
-       const result = await pool.query(`CALL spUpdateResElem(${id},'${id_reserva}','${id_inventario}');`);
+       const result = await pool.query(`CALL spUpdateResElem(${id},'${id_reserva}','${id_inventario}','${estado_aprobacion}');`);
        if (result[0].affectedRows != 0)
           res.json(result);
        else
