@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Servidor: 127.0.0.1
--- Tiempo de generación: 25-06-2023 a las 23:41:06
+-- Tiempo de generación: 26-06-2023 a las 01:19:08
 -- Versión del servidor: 10.4.28-MariaDB
 -- Versión de PHP: 8.0.28
 
@@ -583,6 +583,7 @@ CREATE TABLE `reserva` (
   `FECHA_RES` date NOT NULL,
   `HORA_RES` time NOT NULL,
   `TIEMPO_REQUERIDO` time NOT NULL,
+  `ESTADO_APROVACION` int(1) NOT NULL,
   `ID_USUARIO` int(100) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_general_ci;
 
@@ -590,14 +591,15 @@ CREATE TABLE `reserva` (
 -- Volcado de datos para la tabla `reserva`
 --
 
-INSERT INTO `reserva` (`ID_RESERVA`, `NOMBRE_INSUMO`, `TIPO_INSUMO`, `CARACTERISTICAS`, `CANTIDAD`, `JORNADA`, `FECHA_RES`, `HORA_RES`, `TIEMPO_REQUERIDO`, `ID_USUARIO`) VALUES
-(2, '', '', '', 0, '', '2023-06-14', '12:18:46', '02:00:46', NULL),
-(3, '', '', '', 0, '', '2023-05-14', '12:18:46', '02:00:46', NULL),
-(5, 'cuerda', 'cuero', 'metro', 124, 'diurna', '0000-00-00', '20:14:00', '00:00:02', NULL),
-(10, 'cuerda', 'cuero', 'metro', 124, 'diurna', '0000-00-00', '20:14:00', '00:00:02', 2),
-(15, 'cuerda', 'cuero', 'metro', 124, 'diurna', '0000-00-00', '20:14:00', '00:00:02', 2),
-(16, 'cuerdaaaaaa', 'cuero', 'metro', 124, 'diurna', '0000-00-00', '20:14:00', '00:00:02', 2),
-(39, '1', 'undefined', 'hp', 0, 'Tarde', '2023-06-21', '16:28:00', '00:00:02', 1018226843);
+INSERT INTO `reserva` (`ID_RESERVA`, `NOMBRE_INSUMO`, `TIPO_INSUMO`, `CARACTERISTICAS`, `CANTIDAD`, `JORNADA`, `FECHA_RES`, `HORA_RES`, `TIEMPO_REQUERIDO`, `ESTADO_APROVACION`, `ID_USUARIO`) VALUES
+(2, '', '', '', 0, '', '2023-06-14', '12:18:46', '02:00:46', 0, NULL),
+(3, '', '', '', 0, '', '2023-05-14', '12:18:46', '02:00:46', 0, NULL),
+(5, 'cuerda', 'cuero', 'metro', 124, 'diurna', '0000-00-00', '20:14:00', '00:00:02', 0, NULL),
+(10, 'cuerda', 'cuero', 'metro', 124, 'diurna', '0000-00-00', '20:14:00', '00:00:02', 0, 2),
+(15, 'cuerda', 'cuero', 'metro', 124, 'diurna', '0000-00-00', '20:14:00', '00:00:02', 0, 2),
+(16, 'cuerdaaaaaa', 'cuero', 'metro', 124, 'diurna', '0000-00-00', '20:14:00', '00:00:02', 0, 2),
+(39, '1', 'undefined', 'hp', 0, 'Tarde', '2023-06-21', '16:28:00', '00:00:02', 0, 1018226843),
+(40, '123213', 'trasparente', '50 cm y 60 cm', 3213123, 'Tarde', '2222-02-22', '16:58:00', '00:00:00', 0, 1018226843);
 
 -- --------------------------------------------------------
 
@@ -609,8 +611,7 @@ DROP TABLE IF EXISTS `res_elem`;
 CREATE TABLE `res_elem` (
   `ID_RES_ELEM` int(100) NOT NULL,
   `ID_RESERVA` int(100) NOT NULL,
-  `ID_INVENTARIO` int(100) NOT NULL,
-  `ESTADO_APROBACION` int(1) NOT NULL
+  `ID_INVENTARIO` int(100) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_general_ci;
 
 -- --------------------------------------------------------
@@ -795,7 +796,7 @@ ALTER TABLE `prestamos`
 -- AUTO_INCREMENT de la tabla `reserva`
 --
 ALTER TABLE `reserva`
-  MODIFY `ID_RESERVA` int(100) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=40;
+  MODIFY `ID_RESERVA` int(100) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=41;
 
 --
 -- AUTO_INCREMENT de la tabla `res_elem`
