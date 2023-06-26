@@ -667,7 +667,7 @@ CREATE TABLE `usuario` (
 
 INSERT INTO `usuario` (`ID_USUARIO`, `NOMBRE`, `APELLIDO`, `TIPO_DOCUMENTO`, `CORREO`, `TELEFONO`, `DIRECCION`, `JORNADA`, `PROGRAMA_FORMACION`, `NUM_FICHA`, `GENERO`, `CONTRASENA`, `ID_ROL`) VALUES
 (1, 'daniela', 'jaramillo', 'c.', 'danij@gmail.com', '3147536733', 'calle 142 sur', 'diurna', 'adsi', 2472762, 'femenino', '1234', 1),
-(2, 'csa', 'cami', 'cc', 'mzcsdkesdk@gmial.com', '2344444', 'cra 43-56-90', 'tarde', 'ADSI', 234355, 'masculino', '3232321', 4),
+(2, 'Juan', 'Martinez', 'cc', 'juanduque354@gmail.com', '3728825', 'clle 55a #59b 57', 'tarde', 'ADSI', 2472762, 'masculino', '3728825.', 4),
 (3, 'santiago', 'fd', 'cc', 'mzcsdkesdk@gmial.com', '2344444', 'cra 43-56-90', 'tarde', 'ADSI', 23455, 'masculino', '3232321', 2),
 (1018226843, 'sebas', 'jaramillo', 'c.', 'danij@gmail.com', '3147536733', 'calle 142 sur', 'diurna', 'adsi', 2472762, 'femenino', '1357', 2),
 (1040571170, 'camila', 'grajales', 'cc', 'mcgrajalesv@gmail.com', '3128611996', 'cra 43-56-90', 'tarde', 'adsi', 2472762, 'femenino', '123', 3);
