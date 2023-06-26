@@ -33,10 +33,11 @@ export const insertReserva = async (req, res) => {
    const fecha_res = req.body.fecha_res;
    const hora_res = req.body.hora_res
    const tiempo_requerido = req.body.tiempo_requerido;
+   const estado_aprobacion = req.body.estado_aprobacion;
    const id_usuario = req.body.id_usuario;
 
    try {
-      const result = await pool.query(`CALL spInsertReserva('${nombre_insumo}','${tipo_insumo}','${caracteristicas}','${cantidad}','${jornada}','${fecha_res}','${hora_res}','${tiempo_requerido}','${id_usuario}');`);
+      const result = await pool.query(`CALL spInsertReserva('${nombre_insumo}','${tipo_insumo}','${caracteristicas}','${cantidad}','${jornada}','${fecha_res}','${hora_res}','${tiempo_requerido}','${estado_aprobacion}'),'${id_usuario}');`);
       res.json(result);
    } catch (error) {
       console.error("Ha ocurrido un error" + error);
@@ -67,10 +68,11 @@ export const updateReserva = async (req, res) => {
    const fecha_res = req.body.fecha_res;
    const hora_res = req.body.hora_res
    const tiempo_requerido = req.body.tiempo_requerido;
+   const estado_aprobacion = req.body.estado_aprobacion;
    const id_usuario = req.body.id_usuario;
 
    try {
-      const result = await pool.query(`CALL spUpdateReserva(${id},'${nombre_insumo}','${tipo_insumo}','${caracteristicas}','${cantidad}','${jornada}','${fecha_res}','${hora_res}','${tiempo_requerido}','${id_usuario}');`)
+      const result = await pool.query(`CALL spUpdateReserva(${id},'${nombre_insumo}','${tipo_insumo}','${caracteristicas}','${cantidad}','${jornada}','${fecha_res}','${hora_res}','${tiempo_requerido}','${estado_aprobacion}'),'${id_usuario}');`)
       if (result[0].affectedRows != 0)
          res.json(result);
       else
