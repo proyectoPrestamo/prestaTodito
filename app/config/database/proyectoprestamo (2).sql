@@ -409,7 +409,19 @@ CREATE TABLE `ambientes` (
 --
 
 INSERT INTO `ambientes` (`ID_AMBIENTES`, `CANT_SILLAS`, `CANT_MESAS`, `NUM_APRENDICES`, `NUM_EQUIPOS`) VALUES
-
+(123, 11, 5, 21, 3),
+(220, 2, 2, 2, 4),
+(224, 23, 22, 20, 20),
+(234, 10, 5, 20, 3),
+(257, 15, 8, 18, 4),
+(344, 132, 2, 34, 28),
+(345, 14, 7, 16, 3),
+(456, 8, 4, 22, 5),
+(543, 18, 9, 24, 5),
+(689, 16, 9, 19, 4),
+(712, 20, 10, 25, 6),
+(890, 12, 6, 15, 2),
+(987, 13, 7, 17, 4);
 
 -- --------------------------------------------------------
 
@@ -430,7 +442,8 @@ CREATE TABLE `computador` (
 --
 
 INSERT INTO `computador` (`ID_COMPUTADOR`, `MARCA`, `CARGADOR`, `MOUSE`) VALUES
-
+(1, 'hp', 'No', 'SI'),
+(2, 'hp', 'No', 'yes');
 
 -- --------------------------------------------------------
 
@@ -463,7 +476,8 @@ CREATE TABLE `herramienta` (
 --
 
 INSERT INTO `herramienta` (`ID_HERRAMIENTA`, `TIPO`, `COLOR`) VALUES
-
+(1, 'plana', '45'),
+(2, 'plana', 'rosa');
 
 -- --------------------------------------------------------
 
@@ -511,6 +525,15 @@ CREATE TABLE `material` (
 --
 
 INSERT INTO `material` (`ID_MATERIAL`, `NOMBRE`, `TIPO`, `COLOR`, `MEDIDAS`) VALUES
+(2, 'tela', 'cuero', 'azul', '3 cm'),
+(4, 'tela', 'trasparente', 'azul', '50 cm y 60 cm'),
+(5, 'tela', 'trasparente', 'azul', '1 M'),
+(6, 'tela', 'trasparente', 'azul', '50 cm y 5 cm'),
+(7, 'tela', 'sintentica', 'morado', '200 cm'),
+(12, 'undefined', 'undefined', 'undefined', 'undefined'),
+(13, 'undefined', 'undefined', 'undefined', 'undefined'),
+(14, 'undefined', 'undefined', 'undefined', 'undefined'),
+(15, 'undefined', '12', 'rosa', '2');
 
 -- --------------------------------------------------------
 
