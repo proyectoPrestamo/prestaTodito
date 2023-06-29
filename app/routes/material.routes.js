@@ -2,7 +2,7 @@ import { Router } from "express";
 // ENVIAR ARCHIVOS O PARAMETROS DE OTRA PAGINA DESDE EL SERVIDOR
 
 // importamos los procedimientos
-import * as controller from "../controllers/material.controller"
+import * as controller from "../controllers/material.controller.js"
 const route = Router();
 
 //material

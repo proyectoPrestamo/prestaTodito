@@ -2,7 +2,7 @@ import { Router } from "express";
 // ENVIAR ARCHIVOS O PARAMETROS DE OTRA PAGINA DESDE EL SERVIDOR
 
 // importamos los procedimientos
-import * as controller from "../controllers/inventario.contoller"
+import * as controller from "../controllers/inventario.contoller.js"
 const route = Router();
 
 //inventario
