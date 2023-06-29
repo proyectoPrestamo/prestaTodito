@@ -6,4 +6,3 @@ CREATE TABLE `funcionesrol` (
   `OBSERVACION_PRESTAMO` varchar(100) DEFAULT NULL,
   `ID_ROL` int(11) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_general_ci;
-sssss

@@ -2,7 +2,7 @@ import { Router } from "express";
 // ENVIAR ARCHIVOS O PARAMETROS DE OTRA PAGINA DESDE EL SERVIDOR
 
 // importamos los procedimientos
-import * as controller from "../controllers/rol.controller"
+import * as controller from "../controllers/rol.controller.js"
 const route = Router();
 
 //rol
