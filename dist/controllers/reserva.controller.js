@@ -4,8 +4,7 @@ var _interopRequireDefault = require("@babel/runtime/helpers/interopRequireDefau
 Object.defineProperty(exports, "__esModule", {
   value: true
 });
-exports.updateReserva = exports.updateEstado = exports.insertReserva = exports.findReserva = exports.findAllReserva = exports.deleteReserva = void 0;
-
+exports.updateReserva = exports.updateEstado = exports.insertReserva = exports.findReserva = exports.findAllReserva = exports.deleteReserva = exports.InsumosReserva = void 0;
 var _regenerator = _interopRequireDefault(require("@babel/runtime/regenerator"));
 var _slicedToArray2 = _interopRequireDefault(require("@babel/runtime/helpers/slicedToArray"));
 var _asyncToGenerator2 = _interopRequireDefault(require("@babel/runtime/helpers/asyncToGenerator"));
@@ -259,4 +258,3 @@ var InsumosReserva = /*#__PURE__*/function () {
   };
 }();
 exports.InsumosReserva = InsumosReserva;
-
