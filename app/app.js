@@ -19,7 +19,7 @@ import reservaRoutes from "./routes/reserva.routes"
 import rolRoutes from "./routes/rol.routes";
 import usuarioRoutes from "./routes/usuario.routes";
 import loginRoutes from "./routes/login.routes";
-import NotisRoutes from "./routes/notificaciones.routes";
+// import NotisRoutes from "./routes/notificaciones.routes";
 
 const app = express();
 
@@ -50,7 +50,7 @@ app.use('/api', reservaRoutes);
 app.use('/api', rolRoutes);
 app.use('/api',usuarioRoutes);
 app.use('/api',loginRoutes);
-app.use('/api',NotisRoutes);
+// app.use('/api',NotisRoutes);
 
 
 export default app;
