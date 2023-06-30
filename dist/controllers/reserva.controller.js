@@ -222,7 +222,7 @@ var updateEstado = /*#__PURE__*/function () {
 exports.updateEstado = updateEstado;
 var InsumosReserva = /*#__PURE__*/function () {
   var _ref7 = (0, _asyncToGenerator2["default"])( /*#__PURE__*/_regenerator["default"].mark(function _callee7(req, res) {
-    var nombre_insumo, tipo_insumo, caracteristicas, cantidad, jornada, fecha_res, hora_res, tiempo_requerido, id_usuario, result;
+    var nombre_insumo, tipo_insumo, caracteristicas, cantidad, jornada, fecha_res, hora_res, tiempo_requerido, estado_aprobacion, id_usuario, result;
     return _regenerator["default"].wrap(function _callee7$(_context7) {
       while (1) switch (_context7.prev = _context7.next) {
         case 0:
@@ -234,24 +234,25 @@ var InsumosReserva = /*#__PURE__*/function () {
           fecha_res = req.body.fecha_res;
           hora_res = req.body.hora_res;
           tiempo_requerido = req.body.tiempo_requerido;
+          estado_aprobacion = "en proceso";
           id_usuario = req.body.id_usuario;
-          _context7.prev = 9;
-          _context7.next = 12;
-          return _db.pool.query("CALL spInsumosReserva('".concat(nombre_insumo, "','").concat(tipo_insumo, "','").concat(caracteristicas, "','").concat(cantidad, "','").concat(jornada, "','").concat(fecha_res, "','").concat(hora_res, "','").concat(tiempo_requerido, "','").concat(id_usuario, "');"));
-        case 12:
+          _context7.prev = 10;
+          _context7.next = 13;
+          return _db.pool.query("CALL spInsumosReserva('".concat(nombre_insumo, "','").concat(tipo_insumo, "','").concat(caracteristicas, "','").concat(cantidad, "','").concat(jornada, "','").concat(fecha_res, "','").concat(hora_res, "','").concat(tiempo_requerido, "','").concat(estado_aprobacion, "','").concat(id_usuario, "');"));
+        case 13:
           result = _context7.sent;
           res.json(result);
-          _context7.next = 19;
+          _context7.next = 20;
           break;
-        case 16:
-          _context7.prev = 16;
-          _context7.t0 = _context7["catch"](9);
+        case 17:
+          _context7.prev = 17;
+          _context7.t0 = _context7["catch"](10);
           console.error("Ha ocurrido un error" + _context7.t0);
-        case 19:
+        case 20:
         case "end":
           return _context7.stop();
       }
-    }, _callee7, null, [[9, 16]]);
+    }, _callee7, null, [[10, 17]]);
   }));
   return function InsumosReserva(_x13, _x14) {
     return _ref7.apply(this, arguments);

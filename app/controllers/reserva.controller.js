@@ -111,10 +111,11 @@ export const InsumosReserva = async (req, res) => {
    const fecha_res = req.body.fecha_res;
    const hora_res = req.body.hora_res;
    const tiempo_requerido = req.body.tiempo_requerido;
+   const estado_aprobacion = "en proceso";
    const id_usuario = req.body.id_usuario;
 
    try {
-      const result = await pool.query(`CALL spInsumosReserva('${nombre_insumo}','${tipo_insumo}','${caracteristicas}','${cantidad}','${jornada}','${fecha_res}','${hora_res}','${tiempo_requerido}','${id_usuario}');`);
+      const result = await pool.query(`CALL spInsumosReserva('${nombre_insumo}','${tipo_insumo}','${caracteristicas}','${cantidad}','${jornada}','${fecha_res}','${hora_res}','${tiempo_requerido}','${estado_aprobacion}','${id_usuario}');`);
       res.json(result);
    } catch (error) {
       console.error("Ha ocurrido un error" + error);
