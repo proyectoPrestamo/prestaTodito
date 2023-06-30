@@ -28,8 +28,8 @@ export const findPrestamos= async (req, res) => {
 };
 export const insertPrestamos= async (req, res) => {
   
-   const fechaPrestamo = req.body.fechaPrestamo;
-   const final_prestamo = req.body.final_prestamo;
+   const fechaPrestamo = "0000/00/00";
+   const final_prestamo = "0000/00/00";
    const observaciones = req.body.observaciones;
    const id_usuario = req.body.id_usuario;
 
