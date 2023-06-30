@@ -26,9 +26,9 @@ export const findReserva = async (req, res) => {
 };
 export const insertReserva = async (req, res) => {
    const nombre_insumo = req.body.nombre_insumo;
-    const tipo_insumo = req.body.tipo_insumo;
-    const caracteristicas = req.body.caracteristicas;
-    const cantidad = req.body.cantidad;
+   const tipo_insumo = req.body.tipo_insumo;
+   const caracteristicas = req.body.caracteristicas;
+   const cantidad = req.body.cantidad;
    const jornada = req.body.jornada;
    const fecha_res = req.body.fecha_res;
    const hora_res = req.body.hora_res
@@ -60,9 +60,9 @@ export const deleteReserva = async (req, res) => {
 export const updateReserva = async (req, res) => {
    const id = req.params.id;
    const nombre_insumo = req.body.nombre_insumo;
-    const tipo_insumo = req.body.tipo_insumo;
-    const caracteristicas = req.body.caracteristicas;
-    const cantidad = req.body.cantidad;
+   const tipo_insumo = req.body.tipo_insumo;
+   const caracteristicas = req.body.caracteristicas;
+   const cantidad = req.body.cantidad;
    const jornada = req.body.jornada;
    const fecha_res = req.body.fecha_res;
    const hora_res = req.body.hora_res
@@ -85,8 +85,8 @@ export const updateReserva = async (req, res) => {
 
 export const updateEstado = async (req, res) => {
    const id = req.params.id;
-   const estado_aprobacion= req.body.estado_aprobacion;
-   
+   const estado_aprobacion = req.body.estado_aprobacion;
+
 
 
    try {
@@ -100,4 +100,24 @@ export const updateEstado = async (req, res) => {
       console.error(error);
 
    }
+};
+
+export const InsumosReserva = async (req, res) => {
+   const nombre_insumo = req.body.nombre_insumo;
+   const tipo_insumo = req.body.tipo_insumo;
+   const caracteristicas = req.body.caracteristicas;
+   const cantidad = req.body.cantidad;
+   const jornada = req.body.jornada;
+   const fecha_res = req.body.fecha_res;
+   const hora_res = req.body.hora_res;
+   const tiempo_requerido = req.body.tiempo_requerido;
+   const id_usuario = req.body.id_usuario;
+
+   try {
+      const result = await pool.query(`CALL spInsumosReserva('${nombre_insumo}','${tipo_insumo}','${caracteristicas}','${cantidad}','${jornada}','${fecha_res}','${hora_res}','${tiempo_requerido}','${id_usuario}');`);
+      res.json(result);
+   } catch (error) {
+      console.error("Ha ocurrido un error" + error);
+   }
+
 };
