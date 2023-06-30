@@ -79,32 +79,31 @@ var findPrestamos = /*#__PURE__*/function () {
 exports.findPrestamos = findPrestamos;
 var insertPrestamos = /*#__PURE__*/function () {
   var _ref3 = (0, _asyncToGenerator2["default"])( /*#__PURE__*/_regenerator["default"].mark(function _callee3(req, res) {
-    var fechaPrestamo, final_prestamo, observaciones, img, id_usuario, result;
+    var fechaPrestamo, final_prestamo, observaciones, id_usuario, result;
     return _regenerator["default"].wrap(function _callee3$(_context3) {
       while (1) switch (_context3.prev = _context3.next) {
         case 0:
           fechaPrestamo = req.body.fechaPrestamo;
           final_prestamo = req.body.final_prestamo;
           observaciones = req.body.observaciones;
-          img = req.body.img;
           id_usuario = req.body.id_usuario;
-          _context3.prev = 5;
-          _context3.next = 8;
-          return _db.pool.query("CALL spInsertPrestamos('".concat(fechaPrestamo, "','").concat(final_prestamo, "','").concat(observaciones, "','").concat(img, "',\n       '").concat(id_usuario, "');"));
-        case 8:
+          _context3.prev = 4;
+          _context3.next = 7;
+          return _db.pool.query("CALL spInsertPrestamos('".concat(fechaPrestamo, "','").concat(final_prestamo, "','").concat(observaciones, "',\n       '").concat(id_usuario, "');"));
+        case 7:
           result = _context3.sent;
           res.json(result);
-          _context3.next = 15;
+          _context3.next = 14;
           break;
-        case 12:
-          _context3.prev = 12;
-          _context3.t0 = _context3["catch"](5);
+        case 11:
+          _context3.prev = 11;
+          _context3.t0 = _context3["catch"](4);
           console.error("Ha ocurrido un error" + _context3.t0);
-        case 15:
+        case 14:
         case "end":
           return _context3.stop();
       }
-    }, _callee3, null, [[5, 12]]);
+    }, _callee3, null, [[4, 11]]);
   }));
   return function insertPrestamos(_x5, _x6) {
     return _ref3.apply(this, arguments);
@@ -145,7 +144,7 @@ var deletePrestamos = /*#__PURE__*/function () {
 exports.deletePrestamos = deletePrestamos;
 var updatePrestamos = /*#__PURE__*/function () {
   var _ref5 = (0, _asyncToGenerator2["default"])( /*#__PURE__*/_regenerator["default"].mark(function _callee5(req, res) {
-    var id, fechaPrestamo, final_prestamo, observaciones, img, id_usuario, result;
+    var id, fechaPrestamo, final_prestamo, observaciones, id_usuario, result;
     return _regenerator["default"].wrap(function _callee5$(_context5) {
       while (1) switch (_context5.prev = _context5.next) {
         case 0:
@@ -153,27 +152,26 @@ var updatePrestamos = /*#__PURE__*/function () {
           fechaPrestamo = req.body.fechaPrestamo;
           final_prestamo = req.body.final_prestamo;
           observaciones = req.body.observaciones;
-          img = req.body.img;
           id_usuario = req.body.id_usuario;
-          _context5.prev = 6;
-          _context5.next = 9;
-          return _db.pool.query("CALL spUpdatePrestamos('".concat(id, "','").concat(fechaPrestamo, "','").concat(final_prestamo, "','").concat(observaciones, "','").concat(img, "',\n       '").concat(id_usuario, "');"));
-        case 9:
+          _context5.prev = 5;
+          _context5.next = 8;
+          return _db.pool.query("CALL spUpdatePrestamos('".concat(id, "','").concat(fechaPrestamo, "','").concat(final_prestamo, "','").concat(observaciones, "',\n       '").concat(id_usuario, "');"));
+        case 8:
           result = _context5.sent;
           if (result[0].affectedRows != 0) res.json(result);else res.json({
             "Error": "NO ACTUALIZO"
           });
-          _context5.next = 16;
+          _context5.next = 15;
           break;
-        case 13:
-          _context5.prev = 13;
-          _context5.t0 = _context5["catch"](6);
+        case 12:
+          _context5.prev = 12;
+          _context5.t0 = _context5["catch"](5);
           console.error(_context5.t0);
-        case 16:
+        case 15:
         case "end":
           return _context5.stop();
       }
-    }, _callee5, null, [[6, 13]]);
+    }, _callee5, null, [[5, 12]]);
   }));
   return function updatePrestamos(_x9, _x10) {
     return _ref5.apply(this, arguments);

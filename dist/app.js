@@ -23,6 +23,7 @@ var _reserva = _interopRequireDefault(require("./routes/reserva.routes"));
 var _rol = _interopRequireDefault(require("./routes/rol.routes"));
 var _usuario = _interopRequireDefault(require("./routes/usuario.routes"));
 var _login = _interopRequireDefault(require("./routes/login.routes"));
+var _notificaciones = _interopRequireDefault(require("./routes/notificaciones.routes"));
 // Rutas de la api
 
 var app = (0, _express["default"])();
@@ -55,5 +56,6 @@ app.use('/api', _reserva["default"]);
 app.use('/api', _rol["default"]);
 app.use('/api', _usuario["default"]);
 app.use('/api', _login["default"]);
+app.use('/api', _notificaciones["default"]);
 var _default = app;
 exports["default"] = _default;

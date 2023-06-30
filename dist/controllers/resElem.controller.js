@@ -78,32 +78,29 @@ var findResElem = /*#__PURE__*/function () {
 exports.findResElem = findResElem;
 var insertResElem = /*#__PURE__*/function () {
   var _ref3 = (0, _asyncToGenerator2["default"])( /*#__PURE__*/_regenerator["default"].mark(function _callee3(req, res) {
-    var nombre_insumo, tipo_insumo, caracteristicas, cantidad, estado_aprobacion, result;
+    var id_inventario, id_reserva, result;
     return _regenerator["default"].wrap(function _callee3$(_context3) {
       while (1) switch (_context3.prev = _context3.next) {
         case 0:
-          nombre_insumo = req.body.nombre_insumo;
-          tipo_insumo = req.body.tipo_insumo;
-          caracteristicas = req.body.caracteristicas;
-          cantidad = req.body.cantidad;
-          estado_aprobacion = req.body.estado_aprobacion;
-          _context3.prev = 5;
-          _context3.next = 8;
-          return _db.pool.query("CALL spInsertResElem('".concat(nombre_insumo, "','").concat(tipo_insumo, "','").concat(caracteristicas, "','").concat(cantidad, "','").concat(estado_aprobacion, "');"));
-        case 8:
+          id_inventario = req.body.id_inventario;
+          id_reserva = req.body.id_reserva;
+          _context3.prev = 2;
+          _context3.next = 5;
+          return _db.pool.query("CALL spInsertResElem('".concat(id_inventario, "','").concat(id_reserva, "');"));
+        case 5:
           result = _context3.sent;
           res.json(result);
-          _context3.next = 15;
+          _context3.next = 12;
           break;
-        case 12:
-          _context3.prev = 12;
-          _context3.t0 = _context3["catch"](5);
+        case 9:
+          _context3.prev = 9;
+          _context3.t0 = _context3["catch"](2);
           console.error("Ha ocurrido un error" + _context3.t0);
-        case 15:
+        case 12:
         case "end":
           return _context3.stop();
       }
-    }, _callee3, null, [[5, 12]]);
+    }, _callee3, null, [[2, 9]]);
   }));
   return function insertResElem(_x5, _x6) {
     return _ref3.apply(this, arguments);
@@ -144,35 +141,32 @@ var deleteResElem = /*#__PURE__*/function () {
 exports.deleteResElem = deleteResElem;
 var updateResElem = /*#__PURE__*/function () {
   var _ref5 = (0, _asyncToGenerator2["default"])( /*#__PURE__*/_regenerator["default"].mark(function _callee5(req, res) {
-    var id, nombre_insumo, tipo_insumo, caracteristicas, cantidad, estado_aprobacion, result;
+    var id, id_inventario, id_reserva, result;
     return _regenerator["default"].wrap(function _callee5$(_context5) {
       while (1) switch (_context5.prev = _context5.next) {
         case 0:
           id = req.params.id;
-          nombre_insumo = req.body.nombre_insumo;
-          tipo_insumo = req.body.tipo_insumo;
-          caracteristicas = req.body.caracteristicas;
-          cantidad = req.body.cantidad;
-          estado_aprobacion = req.body.estado_aprobacion;
-          _context5.prev = 6;
-          _context5.next = 9;
-          return _db.pool.query("CALL spUpdateResElem(".concat(id, ",'").concat(nombre_insumo, "','").concat(tipo_insumo, "','").concat(caracteristicas, "','").concat(cantidad, "','").concat(estado_aprobacion, "')'").concat(estado_aprobacion, "');"));
-        case 9:
+          id_inventario = req.body.id_inventario;
+          id_reserva = req.body.id_reserva;
+          _context5.prev = 3;
+          _context5.next = 6;
+          return _db.pool.query("CALL spUpdateResElem(".concat(id, ",'").concat(id_inventario, "','").concat(id_reserva, "';"));
+        case 6:
           result = _context5.sent;
           if (result[0].affectedRows != 0) res.json(result);else res.json({
             "Error": "NO ACTUALIZO"
           });
-          _context5.next = 16;
+          _context5.next = 13;
           break;
-        case 13:
-          _context5.prev = 13;
-          _context5.t0 = _context5["catch"](6);
+        case 10:
+          _context5.prev = 10;
+          _context5.t0 = _context5["catch"](3);
           console.error(_context5.t0);
-        case 16:
+        case 13:
         case "end":
           return _context5.stop();
       }
-    }, _callee5, null, [[6, 13]]);
+    }, _callee5, null, [[3, 10]]);
   }));
   return function updateResElem(_x9, _x10) {
     return _ref5.apply(this, arguments);
