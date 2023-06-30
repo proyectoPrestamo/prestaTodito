@@ -83,8 +83,8 @@ var insertPrestamos = /*#__PURE__*/function () {
     return _regenerator["default"].wrap(function _callee3$(_context3) {
       while (1) switch (_context3.prev = _context3.next) {
         case 0:
-          fechaPrestamo = req.body.fechaPrestamo;
-          final_prestamo = req.body.final_prestamo;
+          fechaPrestamo = "0000/00/00";
+          final_prestamo = "0000/00/00";
           observaciones = req.body.observaciones;
           id_usuario = req.body.id_usuario;
           _context3.prev = 4;
